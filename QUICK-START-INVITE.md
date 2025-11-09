@@ -44,7 +44,7 @@ http://localhost:3005/admin
 
 - **Aniversariante:** Heitor (6 anos)
 - **Tema:** Minecraft
-- **Data:** 17/12/2024
+- **Data:** 17/12/2025
 - **Horário:** 19:00 às 22:00
 - **Local:** Blue Moon - Av Oscarina Cunha Chaves, 112 - Copacabana, Uberlândia - MG
 
