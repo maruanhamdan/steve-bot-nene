@@ -65,6 +65,10 @@ app.get('/info', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'info.html'));
 });
 
+app.get('/info.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'info.html'));
+});
+
 // Lista de palavras/tópicos bloqueados para crianças
 const blockedKeywords = [
   'sexo', 'adulto', 'pornografia', 'drogas', 'violência extrema', 
