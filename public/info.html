@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações - Aniversário Heitor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-item span {
+            color: #333;
+            font-size: 16px;
+            display: block;
+        }
+        
+        .url-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            word-break: break-all;
+            border: 2px dashed #667eea;
+        }
+        
+        .url-box a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .url-box a:hover {
+            text-decoration: underline;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .badge.warning {
+            background: #f59e0b;
+        }
+        
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 50px;
+            position: relative;
+        }
+        
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .password-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .password-box code {
+            font-size: 20px;
+            font-weight: 700;
+            color: #856404;
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Aniversário Heitor</h1>
+            <p>Sistema de Convites - Informações</p>
+        </div>
+        
+        <div class="content">
+            <!-- Status -->
+            <div class="section">
+                <div class="section-title">
+                    ✅ Status do Sistema
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Testes</strong>
+                        <span>10/10 passaram em produção <span class="badge">OK</span></span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Health Check</strong>
+                        <span>Sistema online e funcionando <span class="badge">OK</span></span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Páginas</strong>
+                        <span>Todas funcionando <span class="badge">OK</span></span>
+                    </div>
+                    <div class="info-item">
+                        <strong>APIs</strong>
+                        <span>Funcionando perfeitamente <span class="badge">OK</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- URLs -->
+            <div class="section">
+                <div class="section-title">
+                    🔗 URLs de Produção
+                </div>
+                <div class="info-item">
+                    <strong>URL Base</strong>
+                    <div class="url-box">
+                        <a href="https://elegant-wonder-production.up.railway.app" target="_blank">
+                            https://elegant-wonder-production.up.railway.app
+                        </a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <strong>Convite (Compartilhar)</strong>
+                    <div class="url-box">
+                        <a href="https://elegant-wonder-production.up.railway.app/invite" target="_blank">
+                            https://elegant-wonder-production.up.railway.app/invite
+                        </a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <strong>Admin (Gerenciar)</strong>
+                    <div class="url-box">
+                        <a href="https://elegant-wonder-production.up.railway.app/admin" target="_blank">
+                            https://elegant-wonder-production.up.railway.app/admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Credenciais -->
+            <div class="section">
+                <div class="section-title">
+                    🔐 Credenciais
+                </div>
+                <div class="password-box">
+                    <strong>Senha Admin:</strong><br>
+                    <code>heitor123</code>
+                </div>
+                <p style="color: #666; font-size: 14px; margin-top: 10px;">
+                    Use esta senha para acessar o painel de administração
+                </p>
+            </div>
+            
+            <!-- Informações da Festa -->
+            <div class="section">
+                <div class="section-title">
+                    🎮 Informações da Festa
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Aniversariante</strong>
+                        <span>Heitor (6 anos)</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Data</strong>
+                        <span>17 de Dezembro de 2025</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Horário</strong>
+                        <span>19:00 às 22:00</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Local</strong>
+                        <span>Blue Moon<br>Av Oscarina Cunha Chaves, 112<br>Copacabana, Uberlândia - MG</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Tema</strong>
+                        <span>Minecraft</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Próximos Passos -->
+            <div class="section">
+                <div class="section-title">
+                    📋 Próximos Passos
+                </div>
+                <ol class="steps">
+                    <li>
+                        <strong>Compartilhar o Convite</strong><br>
+                        Envie o link do convite via WhatsApp para os pais dos amigos do Heitor
+                    </li>
+                    <li>
+                        <strong>Monitorar RSVPs</strong><br>
+                        Acesse o painel admin para ver as confirmações em tempo real
+                    </li>
+                    <li>
+                        <strong>Exportar Dados</strong><br>
+                        Use o botão CSV no painel admin para exportar a lista de confirmados
+                    </li>
+                </ol>
+            </div>
+            
+            <!-- O Que Foi Feito -->
+            <div class="section">
+                <div class="section-title">
+                    ✅ O Que Foi Feito
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Datas Corrigidas</strong>
+                        <span>Todas atualizadas para 2025 (Festa: 17/12/2025)</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>GitHub</strong>
+                        <span>Repositório criado e sincronizado</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Railway</strong>
+                        <span>Deploy completo e funcionando</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Variáveis</strong>
+                        <span>Todas configuradas corretamente</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Testes</strong>
+                        <span>10/10 passando em produção</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

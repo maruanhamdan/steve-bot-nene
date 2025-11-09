@@ -73,7 +73,7 @@ test_endpoint "Admin Stats (sem auth)" "GET" "/api/invite/stats" "" "401"
 
 echo ""
 echo "5. Testando Admin API (com senha)..."
-ADMIN_PASS="${ADMIN_PASSWORD:-heitor2024}"
+ADMIN_PASS="${ADMIN_PASSWORD:-heitor123}"
 test_endpoint "Admin RSVPs (com auth)" "GET" "/api/invite/rsvps?password=$ADMIN_PASS" "" "200"
 test_endpoint "Admin Stats (com auth)" "GET" "/api/invite/stats?password=$ADMIN_PASS" "" "200"
 

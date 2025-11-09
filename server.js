@@ -21,7 +21,7 @@ if (!fs.existsSync(DATA_DIR) && !process.env.VERCEL) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 const RSVP_FILE = path.join(DATA_DIR, 'rsvps.json');
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'heitor2024'; // Simple password protection
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'heitor123'; // Simple password protection
 
 // Helper functions for RSVP data
 async function readRSVPs() {
@@ -59,6 +59,10 @@ app.get('/invite', (req, res) => {
 
 app.get('/admin', (req, res) => {
   res.redirect('/admin/dashboard.html');
+});
+
+app.get('/info', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'info.html'));
 });
 
 // Lista de palavras/tópicos bloqueados para crianças

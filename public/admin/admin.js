@@ -1,6 +1,6 @@
 // Admin Dashboard JavaScript
 
-const ADMIN_PASSWORD = 'heitor2024'; // Should match server
+const ADMIN_PASSWORD = 'heitor123'; // Should match server
 let currentPassword = '';
 let allRSVPs = [];
 let filteredRSVPs = [];
