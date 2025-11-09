@@ -1,0 +1,28 @@
+{
+  "name": "steve-bot-minecraft",
+  "version": "1.0.0",
+  "description": "Steve - Assistente Virtual de Minecraft para Crianças",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "./test-deploy.sh",
+    "test:local": "./test-deploy.sh http://localhost:3005",
+    "test:prod": "./test-deploy.sh"
+  },
+  "keywords": [
+    "minecraft",
+    "ai",
+    "assistant",
+    "kids"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "google-tts-api": "^2.0.2"
+  }
+}

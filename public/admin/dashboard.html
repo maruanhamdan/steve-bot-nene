@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - RSVPs Aniversário Heitor</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-box">
+                <h1>🔐 ADMIN</h1>
+                <p class="login-subtitle">Aniversário Heitor</p>
+                <input type="password" id="passwordInput" placeholder="Senha" autocomplete="off">
+                <button id="loginBtn" class="login-btn">ENTRAR</button>
+                <p id="loginError" class="error-message" style="display: none;"></p>
+            </div>
+        </div>
+
+        <!-- Dashboard (hidden initially) -->
+        <div id="dashboard" class="dashboard" style="display: none;">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <h1>🎮 RSVPs - Aniversário Heitor</h1>
+                <button id="logoutBtn" class="logout-btn">SAIR</button>
+            </header>
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card stat-total">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-card stat-confirmed">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="statConfirmed">0</div>
+                    <div class="stat-label">Confirmados</div>
+                </div>
+                <div class="stat-card stat-maybe">
+                    <div class="stat-icon">🤔</div>
+                    <div class="stat-value" id="statMaybe">0</div>
+                    <div class="stat-label">Talvez</div>
+                </div>
+                <div class="stat-card stat-declined">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-value" id="statDeclined">0</div>
+                    <div class="stat-label">Não vão</div>
+                </div>
+            </div>
+
+            <!-- Filters and Search -->
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Buscar por nome...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="yes">✅ Confirmados</button>
+                    <button class="filter-btn" data-filter="maybe">🤔 Talvez</button>
+                    <button class="filter-btn" data-filter="no">❌ Não</button>
+                </div>
+                <button id="exportBtn" class="export-btn">📥 Exportar CSV</button>
+                <button id="refreshBtn" class="refresh-btn">🔄 Atualizar</button>
+            </div>
+
+            <!-- RSVP Table -->
+            <div class="table-container">
+                <table id="rsvpTable" class="rsvp-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Criança</th>
+                            <th>Responsável</th>
+                            <th>WhatsApp</th>
+                            <th>Confirmação</th>
+                            <th>Observações</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rsvpTableBody">
+                        <tr>
+                            <td colspan="7" class="loading">Carregando...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

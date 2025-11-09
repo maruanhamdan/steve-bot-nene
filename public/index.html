@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Steve - Minecraft</title>
+    
+    <!-- Favicon usando emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- SPLASH SCREEN -->
+    <div id="splash" class="splash-screen">
+        <div class="splash-content">
+            <h1 class="splash-title">STEVE</h1>
+            <div class="video-container">
+                <video id="splashVideo" class="splash-video" controls autoplay>
+                    <source src="steve-video.mp4" type="video/mp4">
+                </video>
+            </div>
+            <button id="enterApp" class="enter-btn">🎮 ENTRAR NO APP</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="mainApp" class="container" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <img src="avatar-steve.png" alt="Steve" class="avatar-img">
+            <div class="header-text">
+                <h1>STEVE</h1>
+            </div>
+            <button id="backToVideo" class="back-video-btn" title="Ver vídeo novamente">📺</button>
+        </header>
+
+        <!-- Cards GRANDES -->
+        <div class="cards">
+            <button class="card card1" data-q="Me ajuda a fazer um castelo massa">
+                <div class="card-icon">🏰</div>
+                <div class="card-text">Construções</div>
+            </button>
+            <button class="card card2" data-q="Como sobreviver no primeiro dia">
+                <div class="card-icon">⛺</div>
+                <div class="card-text">Survival</div>
+            </button>
+            <button class="card card3" data-q="Como fazer espada de diamante">
+                <div class="card-icon">⚔️</div>
+                <div class="card-text">Crafting</div>
+            </button>
+            <button class="card card4" data-q="Como derrotar o Ender Dragon">
+                <div class="card-icon">🐉</div>
+                <div class="card-text">Boss</div>
+            </button>
+            <button class="card card5" data-q="Onde encontro diamantes">
+                <div class="card-icon">💎</div>
+                <div class="card-text">Minerar</div>
+            </button>
+            <button class="card card6" data-q="Como ir pro Nether">
+                <div class="card-icon">🔥</div>
+                <div class="card-text">Nether</div>
+            </button>
+        </div>
+
+        <!-- Chat -->
+        <div id="chat" class="chat">
+            <div class="welcome">
+                <h2>👋 Fala mano!</h2>
+                <p>Escolhe um tema ou manda tua pergunta</p>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="input-box">
+            <button id="micBtn" class="mic">🎤</button>
+            <input type="text" id="input" placeholder="Manda tua pergunta...">
+            <button id="sendBtn" class="send">▶️</button>
+        </div>
+
+        <div id="status" class="status"></div>
+        <div id="browserWarning" class="browser-warning" style="display:none;">
+            ⚠️ Use SAFARI para o microfone funcionar! Chrome não suporta.
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

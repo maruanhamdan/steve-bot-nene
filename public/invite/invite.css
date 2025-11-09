@@ -1,0 +1,320 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(180deg, #5B7FA6 0%, #3D5A80 50%, #1E3A5F 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: #fff;
+}
+
+/* Intro Screen */
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1E3A5F 0%, #3D5A80 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.intro-content {
+    text-align: center;
+}
+
+.minecraft-logo {
+    font-size: 80px;
+    margin-bottom: 30px;
+    animation: bounce 1s infinite;
+}
+
+.intro-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0px #000;
+    animation: slideDown 0.8s ease-out;
+}
+
+.intro-subtitle {
+    font-size: 18px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+    animation: slideDown 1s ease-out;
+}
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.loading-dots span {
+    width: 12px;
+    height: 12px;
+    background: #FFD700;
+    border-radius: 50%;
+    animation: pulse 1.4s infinite;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Main Container */
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Minecraft Background Blocks */
+.minecraft-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.block {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #8B7355;
+    border: 3px solid #6B5A45;
+    border-top-color: #A68B6B;
+    border-left-color: #6B5A45;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0.2;
+}
+
+.block-1 {
+    top: 10%;
+    left: 10%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.block-2 {
+    top: 20%;
+    right: 15%;
+    animation: float 8s ease-in-out infinite 1s;
+}
+
+.block-3 {
+    bottom: 15%;
+    left: 20%;
+    animation: float 7s ease-in-out infinite 2s;
+}
+
+.block-4 {
+    bottom: 25%;
+    right: 10%;
+    animation: float 9s ease-in-out infinite 1.5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Content */
+.content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.steve-avatar {
+    font-size: 100px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+    filter: drop-shadow(5px 5px 0px #000);
+}
+
+.main-title {
+    font-size: 36px;
+    margin-bottom: 15px;
+    text-shadow: 4px 4px 0px #000, 6px 6px 10px rgba(0,0,0,0.5);
+    color: #FFD700;
+    letter-spacing: 3px;
+}
+
+.age-badge {
+    display: inline-block;
+    background: #4CAF50;
+    padding: 10px 20px;
+    border: 4px solid #2E7D32;
+    margin-bottom: 30px;
+    font-size: 16px;
+    box-shadow: 0 4px 0 #1B5E20, inset 0 2px 0 rgba(255,255,255,0.3);
+    text-shadow: 2px 2px 0px #000;
+}
+
+.invite-box {
+    background: rgba(0,0,0,0.6);
+    border: 4px solid #8B7355;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 8px 0 #6B5A45, inset 0 2px 0 rgba(255,255,255,0.1);
+}
+
+.invite-text {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.invite-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Minecraft Button */
+.minecraft-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 20px 30px;
+    background: #4CAF50;
+    color: #fff;
+    border: 4px solid #2E7D32;
+    border-top-color: #66BB6A;
+    border-left-color: #2E7D32;
+    cursor: pointer;
+    text-shadow: 2px 2px 0px #000;
+    box-shadow: 0 6px 0 #1B5E20, inset 0 2px 0 rgba(255,255,255,0.3);
+    transition: all 0.1s;
+    margin: 30px 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+.minecraft-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #1B5E20, inset 0 2px 0 rgba(255,255,255,0.3);
+}
+
+.minecraft-btn:hover {
+    background: #66BB6A;
+}
+
+/* Party Info */
+.party-info {
+    margin-top: 40px;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border: 3px solid #8B7355;
+    border-radius: 0;
+}
+
+.info-text {
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #fff;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.info-text:last-child {
+    margin-bottom: 0;
+}
+
+.info-text strong {
+    color: #FFD700;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 28px;
+    }
+    
+    .steve-avatar {
+        font-size: 80px;
+    }
+    
+    .minecraft-btn {
+        font-size: 12px;
+        padding: 18px 25px;
+    }
+    
+    .invite-text {
+        font-size: 12px;
+    }
+    
+    .info-text {
+        font-size: 10px;
+    }
+    
+    .intro-title {
+        font-size: 20px;
+    }
+    
+    .intro-subtitle {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 24px;
+    }
+    
+    .steve-avatar {
+        font-size: 60px;
+    }
+    
+    .minecraft-btn {
+        font-size: 11px;
+        padding: 15px 20px;
+    }
+}
