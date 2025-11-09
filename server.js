@@ -61,12 +61,9 @@ app.get('/admin', (req, res) => {
   res.redirect('/admin/dashboard.html');
 });
 
+// Rota para página de informações (já servida como estático, mas mantendo para compatibilidade)
 app.get('/info', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'info.html'));
-});
-
-app.get('/info.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'info.html'));
+  res.redirect('/info.html');
 });
 
 // Lista de palavras/tópicos bloqueados para crianças
