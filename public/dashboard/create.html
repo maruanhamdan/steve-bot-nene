@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Convite - InviteManager Pro</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>🎉 Criar Novo Convite</h1>
+            <div class="user-info">
+                <a href="/dashboard/index.html" style="color: #667eea; text-decoration: none; font-weight: 600;">← Voltar</a>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="wizard-container">
+                <!-- Step 1: Informações Básicas -->
+                <div id="step1" class="wizard-step active">
+                    <h2>1. Informações Básicas</h2>
+                    <div class="form-group">
+                        <label>Nome da Criança *</label>
+                        <input type="text" id="childName" placeholder="Ex: Heitor" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Idade *</label>
+                        <input type="number" id="age" placeholder="Ex: 6" min="1" max="18" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Data da Festa *</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Horário *</label>
+                        <input type="text" id="time" placeholder="Ex: 19:00 às 22:00" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Local *</label>
+                        <textarea id="location" rows="3" placeholder="Ex: Blue Moon - Av Oscarina Cunha Chaves, 112 - Copacabana, Uberlândia - MG" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tema *</label>
+                        <input type="text" id="theme" placeholder="Ex: Minecraft" required>
+                    </div>
+                    <button class="btn-primary" onclick="nextStep()">Próximo →</button>
+                </div>
+
+                <!-- Step 2: Escolher Jogo -->
+                <div id="step2" class="wizard-step">
+                    <h2>2. Escolher Jogo</h2>
+                    <p style="margin-bottom: 25px; color: #666;">Escolha o jogo que as crianças vão jogar para descobrir o convite:</p>
+                    
+                    <div class="game-options">
+                        <div class="game-option" data-game="minerador" onclick="selectGame('minerador')">
+                            <div class="game-icon">⛏️</div>
+                            <h3>Minerador Pro</h3>
+                            <p>Minere blocos e encontre o diamante!</p>
+                            <div class="game-features">
+                                <span>Grid 4x4</span>
+                                <span>Pontuação</span>
+                                <span>Leaderboard</span>
+                            </div>
+                        </div>
+                        
+                        <div class="game-option" data-game="sequencia" onclick="selectGame('sequencia')">
+                            <div class="game-icon">🎯</div>
+                            <h3>Sequência Master</h3>
+                            <p>Repita a sequência de cores!</p>
+                            <div class="game-features">
+                                <span>10 Níveis</span>
+                                <span>Memória</span>
+                                <span>Competição</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" id="gameType" required>
+                    <p id="gameError" class="error-message" style="display: none;">Escolha um jogo</p>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button class="btn-secondary" onclick="prevStep()">← Voltar</button>
+                        <button class="btn-primary" onclick="nextStep()">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Preview -->
+                <div id="step3" class="wizard-step">
+                    <h2>3. Preview</h2>
+                    <p style="margin-bottom: 25px; color: #666;">Revise as informações antes de criar:</p>
+                    
+                    <div class="preview-card">
+                        <h3 id="previewChildName">-</h3>
+                        <p class="age" id="previewAge">- anos</p>
+                        <div class="preview-details">
+                            <div><strong>📅 Data:</strong> <span id="previewDate">-</span></div>
+                            <div><strong>⏰ Horário:</strong> <span id="previewTime">-</span></div>
+                            <div><strong>📍 Local:</strong> <span id="previewLocation">-</span></div>
+                            <div><strong>🎨 Tema:</strong> <span id="previewTheme">-</span></div>
+                            <div><strong>🎮 Jogo:</strong> <span id="previewGame">-</span></div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button class="btn-secondary" onclick="prevStep()">← Voltar</button>
+                        <button class="btn-primary" onclick="createInvite()" id="createBtn">
+                            ✨ Criar Convite
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Sucesso -->
+                <div id="step4" class="wizard-step">
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 80px; margin-bottom: 20px;">🎉</div>
+                        <h2>Convite Criado com Sucesso!</h2>
+                        <p style="color: #666; margin: 20px 0;">Seu link único está pronto para compartilhar:</p>
+                        <div class="link-box">
+                            <input type="text" id="inviteLink" readonly style="width: 100%; padding: 12px; border: 2px solid #667eea; border-radius: 8px; font-size: 14px;">
+                            <button class="btn-action btn-share" onclick="copyLink()" style="margin-top: 10px;">
+                                📋 Copiar Link
+                            </button>
+                        </div>
+                        <div style="margin-top: 30px;">
+                            <button class="btn-primary" onclick="window.location.href='/dashboard/index.html'">
+                                Ver Meus Convites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="create.js"></script>
+</body>
+</html>

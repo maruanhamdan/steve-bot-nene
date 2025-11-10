@@ -567,6 +567,83 @@ document.querySelectorAll('.confirmation-btn').forEach(btn => {
     });
 });
 
+// Load invite data
+document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const inviteId = urlParams.get('inviteId');
+    
+    if (inviteId) {
+        await loadInviteData(inviteId);
+    } else {
+        loadDefaultInvite();
+    }
+});
+
+async function loadInviteData(inviteId) {
+    try {
+        const response = await fetch(`/api/invites/${inviteId}`);
+        if (response.ok) {
+            const data = await response.json();
+            window.currentInvite = data.invite;
+            renderInviteData(window.currentInvite);
+        }
+    } catch (error) {
+        console.error('Error loading invite:', error);
+        loadDefaultInvite();
+    }
+}
+
+function renderInviteData(invite) {
+    // Update invitation card
+    const childNameEl = document.querySelector('.card-header h3');
+    if (childNameEl) childNameEl.textContent = invite.childName.toUpperCase();
+    
+    const ageEl = document.querySelector('.age');
+    if (ageEl) ageEl.textContent = `${invite.age} ANOS`;
+    
+    const dateEl = document.querySelector('.party-detail .value');
+    if (dateEl && invite.date) {
+        const date = new Date(invite.date + 'T00:00:00');
+        dateEl.textContent = date.toLocaleDateString('pt-BR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+    
+    // Update other fields
+    const details = document.querySelectorAll('.party-detail');
+    if (details.length >= 4) {
+        if (details[1]) {
+            const timeValue = details[1].querySelector('.value');
+            if (timeValue) timeValue.textContent = invite.time;
+        }
+        if (details[2]) {
+            const locationValue = details[2].querySelector('.value');
+            if (locationValue) locationValue.innerHTML = invite.location.replace(/\n/g, '<br>');
+        }
+        if (details[3]) {
+            const themeValue = details[3].querySelector('.value');
+            if (themeValue) themeValue.textContent = invite.theme.toUpperCase();
+        }
+    }
+    
+    window.currentInviteId = invite.id;
+}
+
+function loadDefaultInvite() {
+    // Default data (compatibilidade)
+    window.currentInvite = {
+        id: null,
+        childName: 'Heitor',
+        age: 6,
+        date: '2025-12-17',
+        time: '19:00 às 22:00',
+        location: 'Blue Moon<br>Av Oscarina Cunha Chaves, 112<br>Copacabana, Uberlândia - MG',
+        theme: 'MINECRAFT'
+    };
+}
+
 // Submit form
 document.getElementById('rsvpFormElement').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -581,6 +658,7 @@ document.getElementById('rsvpFormElement').addEventListener('submit', async (e) 
     }
     
     const formData = {
+        inviteId: window.currentInviteId || null,
         childName: childName,
         parentName: document.getElementById('parentName').value.trim(),
         whatsapp: document.getElementById('whatsapp').value.trim(),

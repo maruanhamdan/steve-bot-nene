@@ -12,9 +12,16 @@ let playerName = '';
 let selectedConfirmation = null;
 
 // Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-    // Pegar nome da URL ou localStorage
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load invite data
     const urlParams = new URLSearchParams(window.location.search);
+    const inviteId = urlParams.get('inviteId');
+    
+    if (inviteId) {
+        await loadInviteData(inviteId);
+    }
+    
+    // Pegar nome da URL ou localStorage
     playerName = urlParams.get('name') || localStorage.getItem('playerName') || '';
     
     if (playerName) {
@@ -26,6 +33,40 @@ document.addEventListener('DOMContentLoaded', () => {
     loadLeaderboard();
     startNewLevel();
 });
+
+async function loadInviteData(inviteId) {
+    try {
+        const response = await fetch(`/api/invites/${inviteId}`);
+        if (response.ok) {
+            const data = await response.json();
+            window.currentInvite = data.invite;
+            renderInviteData(window.currentInvite);
+        }
+    } catch (error) {
+        console.error('Error loading invite:', error);
+    }
+}
+
+function renderInviteData(invite) {
+    const childNameEl = document.querySelector('.invitation-card-sequence h3');
+    if (childNameEl) childNameEl.textContent = invite.childName.toUpperCase();
+    
+    const ageEl = document.querySelector('.age-sequence');
+    if (ageEl) ageEl.textContent = `${invite.age} ANOS`;
+    
+    const details = document.querySelectorAll('.party-info-sequence p');
+    if (details.length >= 4) {
+        if (details[0]) {
+            const date = new Date(invite.date + 'T00:00:00');
+            details[0].innerHTML = `<strong>📅 DATA:</strong> ${date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+        }
+        if (details[1]) details[1].innerHTML = `<strong>⏰ HORÁRIO:</strong> ${invite.time}`;
+        if (details[2]) details[2].innerHTML = `<strong>📍 LOCAL:</strong> ${invite.location.replace(/\n/g, '<br>')}`;
+        if (details[3]) details[3].innerHTML = `<strong>🎮 TEMA:</strong> ${invite.theme.toUpperCase()}`;
+    }
+    
+    window.currentInviteId = invite.id;
+}
 
 function setupColorButtons() {
     const buttons = document.querySelectorAll('.color-btn');
@@ -547,6 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const formData = {
+                inviteId: window.currentInviteId || null,
                 childName: childName,
                 parentName: document.getElementById('parentNameSequence').value.trim(),
                 whatsapp: document.getElementById('whatsappSequence').value.trim(),
