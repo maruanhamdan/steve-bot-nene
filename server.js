@@ -152,6 +152,28 @@ app.get('/info', (req, res) => {
   res.redirect('/info.html');
 });
 
+// ==================== ROTAS PARA LAILA (HEITOR) ====================
+
+// Redirecionar página principal do Steve para /heitor
+app.get('/', (req, res) => {
+  res.redirect('/heitor');
+});
+
+// Rota /heitor - Página inicial do convite do Heitor
+app.get('/heitor', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'invite', 'index.html'));
+});
+
+// Rota /invite-heitor - Mesmo que /invite mas com nome específico
+app.get('/invite-heitor', (req, res) => {
+  res.redirect('/invite/index.html');
+});
+
+// Rota /admin-laila - Admin simples para Laila
+app.get('/admin-laila', (req, res) => {
+  res.redirect('/admin/dashboard.html');
+});
+
 // Lista de palavras/tópicos bloqueados para crianças
 const blockedKeywords = [
   'sexo', 'adulto', 'pornografia', 'drogas', 'violência extrema', 
