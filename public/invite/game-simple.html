@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⛏️ Mineração Simples - Heitor</title>
+    <link rel="stylesheet" href="game-simple.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container-simple">
+        <h1 class="game-title-simple">⛏️ MINERAR DIAMANTE</h1>
+        
+        <!-- Bloco Grande -->
+        <div id="bigBlock" class="big-block">
+            <div class="block-content">
+                <div class="block-emoji">⛏️</div>
+                <div class="block-text">TOQUE AQUI!</div>
+            </div>
+        </div>
+        
+        <!-- Barra de Progresso -->
+        <div class="progress-container">
+            <div class="progress-label">Progresso</div>
+            <div class="progress-bar-simple">
+                <div id="progressSimple" class="progress-fill-simple"></div>
+            </div>
+            <div class="progress-text-simple" id="progressText">0 / 10</div>
+        </div>
+        
+        <!-- Instrução -->
+        <p class="instruction">Toque no bloco 10 vezes para encontrar o diamante! 💎</p>
+        
+        <!-- Invitation Reveal (hidden) -->
+        <div id="invitationRevealSimple" class="invitation-reveal-simple" style="display: none;">
+            <div class="celebration-large">🎉✨💎✨🎉</div>
+            <h2>CONVITE ENCONTRADO!</h2>
+            
+            <div class="invitation-card-simple">
+                <h3>HEITOR</h3>
+                <p class="age-simple">6 ANOS</p>
+                
+                <div class="party-info-simple">
+                    <p><strong>📅 DATA:</strong> 17 de Dezembro de 2025</p>
+                    <p><strong>⏰ HORÁRIO:</strong> 19:00 às 22:00</p>
+                    <p><strong>📍 LOCAL:</strong> Blue Moon<br>Av Oscarina Cunha Chaves, 112<br>Copacabana, Uberlândia - MG</p>
+                    <p><strong>🎮 TEMA:</strong> MINECRAFT</p>
+                </div>
+            </div>
+            
+            <!-- RSVP Form Simplificado -->
+            <div id="rsvpFormSimple" class="rsvp-form-simple">
+                <h3>🎉 Confirmar Presença</h3>
+                <form id="rsvpFormSimpleElement" class="simple-form">
+                    <div class="simple-input-group">
+                        <div class="input-icon">👶</div>
+                        <input type="text" id="childNameSimple" placeholder="Nome da criança" class="simple-input" required>
+                    </div>
+                    <div class="simple-input-group">
+                        <div class="input-icon">👤</div>
+                        <input type="text" id="parentNameSimple" placeholder="Seu nome" class="simple-input" required>
+                    </div>
+                    <div class="simple-input-group">
+                        <div class="input-icon">📱</div>
+                        <input type="tel" id="whatsappSimple" placeholder="WhatsApp" class="simple-input" required>
+                    </div>
+                    <div class="confirmation-buttons-simple">
+                        <p>Vamos à festa?</p>
+                        <div class="button-row-simple">
+                            <button type="button" class="confirmation-btn-simple yes-btn-simple" data-value="yes">
+                                ✅ SIM!
+                            </button>
+                            <button type="button" class="confirmation-btn-simple maybe-btn-simple" data-value="maybe">
+                                🤔 TALVEZ
+                            </button>
+                            <button type="button" class="confirmation-btn-simple no-btn-simple" data-value="no">
+                                ❌ NÃO
+                            </button>
+                        </div>
+                        <input type="hidden" id="confirmationSimple" required>
+                    </div>
+                    <button type="submit" class="submit-btn-simple" id="submitBtnSimple">
+                        🎉 ENVIAR
+                    </button>
+                </form>
+                <div id="formSuccessSimple" class="form-success-simple" style="display: none;">
+                    <div class="success-icon-simple">🎉✨</div>
+                    <h3>Confirmado!</h3>
+                    <p>Nos vemos na festa! 🎮</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game-simple.js"></script>
+</body>
+</html>

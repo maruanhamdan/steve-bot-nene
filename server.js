@@ -57,6 +57,10 @@ app.get('/invite', (req, res) => {
   res.redirect('/invite/index.html');
 });
 
+app.get('/invite/simple', (req, res) => {
+  res.redirect('/invite/game-simple.html');
+});
+
 app.get('/admin', (req, res) => {
   res.redirect('/admin/dashboard.html');
 });

@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(180deg, #1E3A5F 0%, #3D5A80 50%, #1E3A5F 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.game-container-simple {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.game-title-simple {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #FFD700;
+    text-shadow: 3px 3px 0px #000;
+    font-weight: 700;
+}
+
+/* Bloco Grande */
+.big-block {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 40px;
+    background: linear-gradient(135deg, #8B7355 0%, #6B5A45 100%);
+    border: 6px solid #6B5A45;
+    border-top-color: #A68B6B;
+    border-left-color: #6B5A45;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 10px 0 #5A4A35,
+        inset 0 0 20px rgba(0,0,0,0.3),
+        0 0 30px rgba(139, 115, 85, 0.5);
+    transition: all 0.1s;
+    position: relative;
+    overflow: hidden;
+}
+
+.big-block:active {
+    transform: scale(0.95) translateY(5px);
+    box-shadow: 
+        0 5px 0 #5A4A35,
+        inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.big-block.tapped {
+    animation: blockTap 0.3s ease-out;
+}
+
+@keyframes blockTap {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.9) rotate(5deg); }
+}
+
+.block-content {
+    text-align: center;
+}
+
+.block-emoji {
+    font-size: 80px;
+    margin-bottom: 10px;
+    filter: drop-shadow(3px 3px 0px #000);
+}
+
+.block-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+}
+
+/* Progresso */
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.progress-bar-simple {
+    width: 100%;
+    height: 40px;
+    background: #2E2E2E;
+    border: 4px solid #000;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.progress-fill-simple {
+    height: 100%;
+    background: linear-gradient(90deg, #f44336 0%, #FFC107 50%, #4CAF50 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+    border-radius: 20px;
+}
+
+.progress-text-simple {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.instruction {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 0px #000;
+}
+
+/* Invitation Reveal */
+.invitation-reveal-simple {
+    animation: slideUp 0.8s ease-out;
+}
+
+.celebration-large {
+    font-size: 60px;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+.invitation-reveal-simple h2 {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 0px #000;
+}
+
+.invitation-card-simple {
+    background: rgba(0,0,0,0.7);
+    border: 4px solid #8B7355;
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+.invitation-card-simple h3 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0px #000;
+}
+
+.age-simple {
+    font-size: 18px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.party-info-simple {
+    text-align: left;
+    font-size: 14px;
+    line-height: 2;
+    color: #fff;
+}
+
+.party-info-simple p {
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.party-info-simple strong {
+    color: #FFD700;
+}
+
+/* RSVP Form Simplificado */
+.rsvp-form-simple {
+    margin-top: 30px;
+    background: rgba(0,0,0,0.7);
+    border: 4px solid #8B7355;
+    padding: 30px 20px;
+    border-radius: 12px;
+}
+
+.rsvp-form-simple h3 {
+    font-size: 20px;
+    margin-bottom: 25px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.simple-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.simple-input-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border: 3px solid #8B7355;
+    border-radius: 12px;
+}
+
+.input-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.simple-input {
+    flex: 1;
+    padding: 18px 15px;
+    font-size: 18px;
+    background: rgba(255,255,255,0.95);
+    border: none;
+    border-radius: 8px;
+    color: #333;
+}
+
+.simple-input:focus {
+    outline: 3px solid #4CAF50;
+    background: #fff;
+}
+
+.confirmation-buttons-simple {
+    margin: 20px 0;
+}
+
+.confirmation-buttons-simple p {
+    font-size: 16px;
+    color: #FFD700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.button-row-simple {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirmation-btn-simple {
+    flex: 1;
+    padding: 25px 20px;
+    border: 4px solid;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.2s;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.3);
+    background: rgba(255,255,255,0.95);
+}
+
+.confirmation-btn-simple:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+}
+
+.yes-btn-simple {
+    border-color: #4CAF50;
+    color: #2E7D32;
+}
+
+.yes-btn-simple:hover, .yes-btn-simple.selected {
+    background: #4CAF50;
+    color: white;
+    transform: scale(1.05);
+}
+
+.maybe-btn-simple {
+    border-color: #FFC107;
+    color: #F57C00;
+}
+
+.maybe-btn-simple:hover, .maybe-btn-simple.selected {
+    background: #FFC107;
+    color: white;
+    transform: scale(1.05);
+}
+
+.no-btn-simple {
+    border-color: #f44336;
+    color: #c62828;
+}
+
+.no-btn-simple:hover, .no-btn-simple.selected {
+    background: #f44336;
+    color: white;
+    transform: scale(1.05);
+}
+
+.submit-btn-simple {
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    border: 4px solid #2E7D32;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin-top: 10px;
+    box-shadow: 0 8px 0 #1B5E20;
+    transition: all 0.2s;
+}
+
+.submit-btn-simple:active {
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 #1B5E20;
+}
+
+.submit-btn-simple:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 0 #1B5E20;
+}
+
+.form-success-simple {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(102, 187, 106, 0.3) 100%);
+    border: 4px solid #4CAF50;
+    border-radius: 12px;
+}
+
+.success-icon-simple {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+.form-success-simple h3 {
+    font-size: 28px;
+    color: #4CAF50;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.form-success-simple p {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 0px #000;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .big-block {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .block-emoji {
+        font-size: 60px;
+    }
+    
+    .game-title-simple {
+        font-size: 20px;
+    }
+}
+

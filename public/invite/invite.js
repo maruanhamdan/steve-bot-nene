@@ -21,6 +21,11 @@ document.getElementById('startGame').addEventListener('click', () => {
     window.location.href = 'game.html';
 });
 
+// Start simple game button
+document.getElementById('startGameSimple').addEventListener('click', () => {
+    window.location.href = 'game-simple.html';
+});
+
 // Add some interactive effects
 document.addEventListener('DOMContentLoaded', () => {
     // Add click effect to blocks
