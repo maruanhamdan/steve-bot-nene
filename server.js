@@ -430,6 +430,103 @@ app.put('/api/invite/rsvp/:id', async (req, res) => {
   }
 });
 
+// ==================== LEADERBOARD API ====================
+const LEADERBOARD_FILE = path.join(DATA_DIR, 'leaderboard.json');
+
+async function readLeaderboard() {
+  try {
+    if (!fs.existsSync(LEADERBOARD_FILE)) {
+      return { game1: [], game2: [] };
+    }
+    const data = await fs.promises.readFile(LEADERBOARD_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading leaderboard:', error);
+    return { game1: [], game2: [] };
+  }
+}
+
+async function writeLeaderboard(leaderboard) {
+  try {
+    await fs.promises.writeFile(LEADERBOARD_FILE, JSON.stringify(leaderboard, null, 2), 'utf8');
+    return true;
+  } catch (error) {
+    console.error('Error writing leaderboard:', error);
+    return false;
+  }
+}
+
+// Submit score
+app.post('/api/leaderboard/score', async (req, res) => {
+  try {
+    const { gameType, playerName, score, time, blocks, timestamp } = req.body;
+    
+    if (!gameType || !playerName || score === undefined) {
+      return res.status(400).json({ error: 'Dados incompletos' });
+    }
+    
+    const leaderboard = await readLeaderboard();
+    const gameKey = gameType === 'minerador' ? 'game1' : 'game2';
+    
+    const entry = {
+      id: Date.now().toString(),
+      playerName: playerName.trim(),
+      score: parseInt(score),
+      time: time || 0,
+      blocks: blocks || 0,
+      timestamp: timestamp || new Date().toISOString()
+    };
+    
+    if (!leaderboard[gameKey]) {
+      leaderboard[gameKey] = [];
+    }
+    
+    leaderboard[gameKey].push(entry);
+    
+    // Manter apenas top 50
+    leaderboard[gameKey].sort((a, b) => {
+      // Maior pontuação primeiro, depois menor tempo, depois menos blocos
+      if (b.score !== a.score) return b.score - a.score;
+      if (a.time !== b.time) return a.time - b.time;
+      return a.blocks - b.blocks;
+    });
+    
+    leaderboard[gameKey] = leaderboard[gameKey].slice(0, 50);
+    
+    await writeLeaderboard(leaderboard);
+    
+    // Calcular posição
+    const position = leaderboard[gameKey].findIndex(e => e.id === entry.id) + 1;
+    
+    res.json({
+      success: true,
+      position,
+      entry
+    });
+  } catch (error) {
+    console.error('Error submitting score:', error);
+    res.status(500).json({ error: 'Erro ao salvar pontuação' });
+  }
+});
+
+// Get leaderboard
+app.get('/api/leaderboard/:gameType', async (req, res) => {
+  try {
+    const { gameType } = req.params;
+    const limit = parseInt(req.query.limit) || 10;
+    
+    const leaderboard = await readLeaderboard();
+    const gameKey = gameType === 'minerador' ? 'game1' : 'game2';
+    
+    const scores = (leaderboard[gameKey] || []).slice(0, limit);
+    
+    res.json({ scores });
+  } catch (error) {
+    console.error('Error fetching leaderboard:', error);
+    res.status(500).json({ error: 'Erro ao buscar leaderboard' });
+  }
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Steve está online!' });

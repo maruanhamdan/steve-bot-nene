@@ -22,11 +22,31 @@
     <div class="game-container">
         <!-- Header -->
         <div class="game-header">
-            <h1 class="game-title">⛏️ MINERAR DIAMANTES</h1>
+            <h1 class="game-title">⛏️ MINERADOR PRO</h1>
+            <div class="game-stats">
+                <div class="stat-box">
+                    <span class="stat-label">⏱️ Tempo:</span>
+                    <span id="gameTimer" class="stat-value">0s</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">⛏️ Blocos:</span>
+                    <span id="blocksCount" class="stat-value">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">⭐ Pontos:</span>
+                    <span id="gameScore" class="stat-value">0</span>
+                </div>
+            </div>
             <div class="progress-bar">
                 <div id="progress" class="progress-fill"></div>
             </div>
             <p class="progress-text">Clique nos blocos para minerar!</p>
+            
+            <!-- Leaderboard -->
+            <div id="leaderboardContainer" class="leaderboard-container" style="display: none;">
+                <h3>🏆 Ranking</h3>
+                <div id="leaderboardList" class="leaderboard-list"></div>
+            </div>
         </div>
 
         <!-- Block Grid -->

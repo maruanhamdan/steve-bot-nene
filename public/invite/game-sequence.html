@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎯 Sequência Master - Heitor</title>
+    <link rel="stylesheet" href="game-sequence.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka+One:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container-sequence">
+        <h1 class="game-title-sequence">🎯 SEQUÊNCIA MASTER</h1>
+        
+        <div class="game-stats-sequence">
+            <div class="stat-box-sequence">
+                <span class="stat-label-sequence">⏱️ Tempo:</span>
+                <span id="gameTimerSequence" class="stat-value-sequence">0s</span>
+            </div>
+            <div class="stat-box-sequence">
+                <span class="stat-label-sequence">🎯 Nível:</span>
+                <span id="gameLevel" class="stat-value-sequence">1</span>
+            </div>
+            <div class="stat-box-sequence">
+                <span class="stat-label-sequence">⭐ Pontos:</span>
+                <span id="gameScoreSequence" class="stat-value-sequence">0</span>
+            </div>
+        </div>
+        
+        <div class="instructions-sequence" id="instructionsSequence">
+            <p id="instructionText">Observe a sequência e repita!</p>
+        </div>
+        
+        <div class="sequence-display" id="sequenceDisplay"></div>
+        
+        <div class="color-grid" id="colorGrid">
+            <div class="color-btn" data-color="red" style="background: #f44336;"></div>
+            <div class="color-btn" data-color="blue" style="background: #2196F3;"></div>
+            <div class="color-btn" data-color="green" style="background: #4CAF50;"></div>
+            <div class="color-btn" data-color="yellow" style="background: #FFC107;"></div>
+        </div>
+        
+        <!-- Leaderboard -->
+        <div id="leaderboardContainerSequence" class="leaderboard-container-sequence" style="display: none;">
+            <h3>🏆 Ranking</h3>
+            <div id="leaderboardListSequence" class="leaderboard-list-sequence"></div>
+        </div>
+        
+        <!-- Invitation Reveal -->
+        <div id="invitationRevealSequence" class="invitation-reveal-sequence" style="display: none;">
+            <div class="celebration-large-sequence">🎉✨💎✨🎉</div>
+            <h2>CONVITE ENCONTRADO!</h2>
+            
+            <div class="invitation-card-sequence">
+                <h3>HEITOR</h3>
+                <p class="age-sequence">6 ANOS</p>
+                
+                <div class="party-info-sequence">
+                    <p><strong>📅 DATA:</strong> 17 de Dezembro de 2025</p>
+                    <p><strong>⏰ HORÁRIO:</strong> 19:00 às 22:00</p>
+                    <p><strong>📍 LOCAL:</strong> Blue Moon<br>Av Oscarina Cunha Chaves, 112<br>Copacabana, Uberlândia - MG</p>
+                    <p><strong>🎮 TEMA:</strong> MINECRAFT</p>
+                </div>
+            </div>
+            
+            <!-- RSVP Form -->
+            <div id="rsvpFormSequence" class="rsvp-form-sequence">
+                <h3>🎉 Confirmar Presença</h3>
+                <form id="rsvpFormSequenceElement" class="simple-form-sequence">
+                    <div class="simple-input-group-sequence">
+                        <div class="input-icon-sequence">👶</div>
+                        <input type="text" id="childNameSequence" placeholder="Nome da criança" class="simple-input-sequence" required>
+                    </div>
+                    <div class="simple-input-group-sequence">
+                        <div class="input-icon-sequence">👤</div>
+                        <input type="text" id="parentNameSequence" placeholder="Seu nome" class="simple-input-sequence" required>
+                    </div>
+                    <div class="simple-input-group-sequence">
+                        <div class="input-icon-sequence">📱</div>
+                        <input type="tel" id="whatsappSequence" placeholder="WhatsApp" class="simple-input-sequence" required>
+                    </div>
+                    <div class="confirmation-buttons-sequence">
+                        <p>Vamos à festa?</p>
+                        <div class="button-row-sequence">
+                            <button type="button" class="confirmation-btn-sequence yes-btn-sequence" data-value="yes">✅ SIM!</button>
+                            <button type="button" class="confirmation-btn-sequence maybe-btn-sequence" data-value="maybe">🤔 TALVEZ</button>
+                            <button type="button" class="confirmation-btn-sequence no-btn-sequence" data-value="no">❌ NÃO</button>
+                        </div>
+                        <input type="hidden" id="confirmationSequence" required>
+                    </div>
+                    <button type="submit" class="submit-btn-sequence" id="submitBtnSequence">🎉 ENVIAR</button>
+                </form>
+                <div id="formSuccessSequence" class="form-success-sequence" style="display: none;">
+                    <div class="success-icon-sequence">🎉✨</div>
+                    <h3>Confirmado!</h3>
+                    <p>Nos vemos na festa! 🎮</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game-sequence.js"></script>
+</body>
+</html>

@@ -1,17 +1,125 @@
-// Game Configuration - MELHORADO
-const GRID_SIZE = 4; // Reduzido de 5 para 4 (mais fácil)
+// ⛏️ MINERADOR PRO - Jogo com Pontuação e Leaderboard
+const GRID_SIZE = 4;
 const TOTAL_BLOCKS = GRID_SIZE * GRID_SIZE;
-// Diamond sempre em posição fixa para facilitar (último bloco)
-const DIAMOND_BLOCK_INDEX = TOTAL_BLOCKS - 1; // Último bloco sempre tem o diamante
+const DIAMOND_BLOCK_INDEX = TOTAL_BLOCKS - 1;
 let blocksMined = 0;
 let gameComplete = false;
-let selectedConfirmation = null; // Para o formulário simplificado
+let selectedConfirmation = null;
+let gameStartTime = null;
+let gameTimer = null;
+let playerName = '';
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', () => {
+    // Pegar nome da URL ou localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    playerName = urlParams.get('name') || localStorage.getItem('playerName') || '';
+    
+    if (playerName) {
+        const nameInput = document.getElementById('childName');
+        if (nameInput) nameInput.value = playerName;
+    }
+    
     createBlockGrid();
     updateProgress();
+    loadLeaderboard();
+    
+    // Iniciar timer quando primeiro bloco for clicado
+    document.getElementById('blockGrid').addEventListener('click', startTimer, { once: true });
 });
+
+function startTimer() {
+    gameStartTime = Date.now();
+    gameTimer = setInterval(() => {
+        if (!gameComplete) {
+            const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+            document.getElementById('gameTimer').textContent = elapsed + 's';
+            updateScore();
+        }
+    }, 100);
+}
+
+function updateScore() {
+    if (!gameStartTime) return;
+    const time = Math.floor((Date.now() - gameStartTime) / 1000);
+    const timeBonus = Math.max(0, 10000 - (time * 50)); // Bônus por velocidade
+    const blocksPenalty = blocksMined * 10; // Penalidade por blocos
+    const score = Math.max(0, timeBonus - blocksPenalty + 1000); // Base score
+    
+    document.getElementById('gameScore').textContent = score.toLocaleString();
+    document.getElementById('blocksCount').textContent = blocksMined;
+}
+
+async function loadLeaderboard() {
+    try {
+        const response = await fetch('/api/leaderboard/minerador?limit=5');
+        const data = await response.json();
+        
+        if (data.scores && data.scores.length > 0) {
+            const container = document.getElementById('leaderboardContainer');
+            const list = document.getElementById('leaderboardList');
+            list.innerHTML = '';
+            
+            data.scores.forEach((entry, index) => {
+                const item = document.createElement('div');
+                item.className = 'leaderboard-item';
+                item.innerHTML = `
+                    <span class="rank">${index + 1}º</span>
+                    <span class="name">${entry.playerName}</span>
+                    <span class="score">${entry.score.toLocaleString()} pts</span>
+                `;
+                list.appendChild(item);
+            });
+            
+            container.style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Erro ao carregar leaderboard:', error);
+    }
+}
+
+async function submitScore() {
+    if (!playerName) {
+        playerName = document.getElementById('childName')?.value.trim() || 'Jogador';
+    }
+    
+    if (!gameStartTime) return;
+    
+    const time = Math.floor((Date.now() - gameStartTime) / 1000);
+    const timeBonus = Math.max(0, 10000 - (time * 50));
+    const blocksPenalty = blocksMined * 10;
+    const score = Math.max(0, timeBonus - blocksPenalty + 1000);
+    
+    try {
+        const response = await fetch('/api/leaderboard/score', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                gameType: 'minerador',
+                playerName: playerName,
+                score: score,
+                time: time,
+                blocks: blocksMined,
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            // Mostrar posição no ranking
+            const positionEl = document.createElement('div');
+            positionEl.className = 'score-submitted';
+            positionEl.innerHTML = `🏆 Você ficou em ${data.position}º lugar!`;
+            document.querySelector('.game-header').appendChild(positionEl);
+            
+            setTimeout(() => {
+                loadLeaderboard();
+            }, 1000);
+        }
+    } catch (error) {
+        console.error('Erro ao enviar pontuação:', error);
+    }
+}
 
 // Create block grid
 function createBlockGrid() {
@@ -43,22 +151,25 @@ function mineBlock(block, index) {
     block.classList.add('mined');
     blocksMined++;
     
-    // Play sound effect (mais variado)
-    playSound('break');
+    // Play sound effect melhorado (quebra de bloco + picareta)
+    playMiningSound();
     
     // Create MORE particles (mais visual)
-    createParticles(block, 8); // Aumentado de 5 para 8
+    createParticles(block, 8);
     
     // Haptic feedback (se disponível)
     if (navigator.vibrate) {
         navigator.vibrate(50);
     }
     
+    // Atualizar pontuação
+    updateScore();
+    
     // Check if it's the diamond block
     if (block.dataset.isDiamond === 'true') {
         setTimeout(() => {
             revealDiamond(block);
-        }, 200); // Mais rápido
+        }, 200);
     }
     
     // Update progress with animation
@@ -74,20 +185,22 @@ function mineBlock(block, index) {
 function revealDiamond(block) {
     gameComplete = true;
     
+    // Parar timer
+    if (gameTimer) {
+        clearInterval(gameTimer);
+    }
+    
     // Add diamond class
     block.classList.add('diamond');
     
-    // Play celebration sound
-    playSound('diamond');
+    // Play som épico de descoberta de diamante
+    playDiamondDiscoverySound();
     
     // Screen shake mais intenso
     document.body.classList.add('shake');
     setTimeout(() => {
         document.body.classList.remove('shake');
     }, 600);
-    
-    // Play success sound
-    playSound('success');
     
     // MEGA celebração visual
     for (let i = 0; i < 20; i++) {
@@ -101,7 +214,10 @@ function revealDiamond(block) {
         navigator.vibrate([200, 100, 200, 100, 200]);
     }
     
-    // Show invitation after delay (mais rápido)
+    // Enviar pontuação
+    submitScore();
+    
+    // Show invitation after delay
     setTimeout(() => {
         showInvitation();
     }, 1000);
@@ -219,6 +335,121 @@ function initAudioContext() {
     return audioContext;
 }
 
+// Som melhorado de mineração (quebra de bloco + picareta)
+function playMiningSound() {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+    
+    try {
+        // Som de picareta batendo no bloco
+        const pickaxeFreqs = [200, 250, 300];
+        const blockBreakFreqs = [150, 180, 220];
+        
+        // Picareta
+        pickaxeFreqs.forEach((freq, index) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.value = freq;
+            osc.type = 'square';
+            
+            const start = ctx.currentTime + (index * 0.02);
+            gain.gain.setValueAtTime(0, start);
+            gain.gain.linearRampToValueAtTime(0.25, start + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, start + 0.1);
+            osc.start(start);
+            osc.stop(start + 0.1);
+        });
+        
+        // Quebra do bloco (ligeiramente depois)
+        setTimeout(() => {
+            blockBreakFreqs.forEach((freq, index) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = freq;
+                osc.type = 'sawtooth';
+                
+                const start = ctx.currentTime + (index * 0.01);
+                gain.gain.setValueAtTime(0, start);
+                gain.gain.linearRampToValueAtTime(0.2, start + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.01, start + 0.15);
+                osc.start(start);
+                osc.stop(start + 0.15);
+            });
+        }, 50);
+        
+    } catch (e) {
+        console.log('Mining sound');
+    }
+}
+
+// Som épico de descoberta de diamante
+function playDiamondDiscoverySound() {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+    
+    try {
+        // Sequência épica: notas ascendentes + brilho
+        const notes = [
+            { freq: 523.25, time: 0 },    // C
+            { freq: 659.25, time: 0.1 },  // E
+            { freq: 783.99, time: 0.2 },  // G
+            { freq: 987.77, time: 0.3 },  // B
+            { freq: 1174.66, time: 0.4 }, // D (alta)
+            { freq: 1318.51, time: 0.5 }  // E (alta)
+        ];
+        
+        notes.forEach((note) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.value = note.freq;
+            osc.type = 'sine';
+            
+            const start = ctx.currentTime + note.time;
+            const duration = 0.4;
+            const volume = 0.5;
+            
+            gain.gain.setValueAtTime(0, start);
+            gain.gain.linearRampToValueAtTime(volume, start + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, start + duration);
+            osc.start(start);
+            osc.stop(start + duration);
+        });
+        
+        // Efeito de "brilho" (ruído branco filtrado)
+        setTimeout(() => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.type = 'sawtooth';
+            osc.frequency.value = 800;
+            filter.type = 'bandpass';
+            filter.frequency.value = 2000;
+            filter.Q.value = 1;
+            
+            const start = ctx.currentTime;
+            gain.gain.setValueAtTime(0, start);
+            gain.gain.linearRampToValueAtTime(0.3, start + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, start + 0.3);
+            osc.start(start);
+            osc.stop(start + 0.3);
+        }, 200);
+        
+    } catch (e) {
+        console.log('Diamond discovery sound');
+    }
+}
+
 function playSound(type) {
     const ctx = initAudioContext();
     if (!ctx) return;
@@ -226,24 +457,11 @@ function playSound(type) {
     try {
         let frequencies = [];
         let duration = 0;
-        let oscillatorType = 'square';
+        let oscillatorType = 'sine';
         
         switch(type) {
-            case 'break':
-                // Minecraft block break sound - multiple frequencies
-                frequencies = [150, 200, 250];
-                duration = 0.15;
-                oscillatorType = 'square';
-                break;
-            case 'diamond':
-                // Celebration sound - ascending notes
-                frequencies = [523.25, 659.25, 783.99, 987.77]; // C, E, G, B
-                duration = 0.6;
-                oscillatorType = 'sine';
-                break;
             case 'success':
-                // Success sound
-                frequencies = [440, 554.37, 659.25]; // A, C#, E
+                frequencies = [440, 554.37, 659.25];
                 duration = 0.4;
                 oscillatorType = 'sine';
                 break;
@@ -252,7 +470,6 @@ function playSound(type) {
                 duration = 0.2;
         }
         
-        // Play all frequencies
         frequencies.forEach((freq, index) => {
             const oscillator = ctx.createOscillator();
             const gainNode = ctx.createGain();
@@ -264,7 +481,7 @@ function playSound(type) {
             oscillator.type = oscillatorType;
             
             const startTime = ctx.currentTime + (index * 0.05);
-            const volume = type === 'diamond' ? 0.4 : 0.3;
+            const volume = 0.3;
             
             gainNode.gain.setValueAtTime(0, startTime);
             gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.01);
@@ -312,12 +529,21 @@ document.querySelectorAll('.confirmation-btn').forEach(btn => {
 document.getElementById('rsvpFormElement').addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    const childNameInput = document.getElementById('childName');
+    const childName = childNameInput.value.trim();
+    
+    // Salvar nome para próximas vezes
+    if (childName) {
+        localStorage.setItem('playerName', childName);
+        playerName = childName;
+    }
+    
     const formData = {
-        childName: document.getElementById('childName').value.trim(),
+        childName: childName,
         parentName: document.getElementById('parentName').value.trim(),
         whatsapp: document.getElementById('whatsapp').value.trim(),
         confirmation: document.getElementById('confirmation').value,
-        notes: null, // Removido campo de observações
+        notes: null,
         timestamp: new Date().toISOString()
     };
     
