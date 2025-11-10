@@ -90,29 +90,29 @@
 
             <!-- RSVP Form - SIMPLIFICADO -->
             <div id="rsvpForm" class="rsvp-form">
-                <h3 class="form-title">🎉 Confirmar Presença</h3>
+                <h3 class="form-title">Confirmar Presença</h3>
                 
                 <!-- Formulário Simplificado -->
                 <form id="rsvpFormElement" class="simple-form">
-                    <!-- Nome da Criança -->
+                    <!-- Convidado -->
                     <div class="simple-input-group">
-                        <div class="input-icon">👶</div>
+                        <label class="input-label">Convidado:</label>
                         <input type="text" id="childName" name="childName" required 
                                placeholder="Nome da criança" 
                                class="simple-input">
                     </div>
                     
-                    <!-- Nome do Responsável -->
+                    <!-- Responsável -->
                     <div class="simple-input-group">
-                        <div class="input-icon">👤</div>
+                        <label class="input-label">Responsável:</label>
                         <input type="text" id="parentName" name="parentName" required 
                                placeholder="Seu nome" 
                                class="simple-input">
                     </div>
                     
-                    <!-- WhatsApp -->
+                    <!-- Contato -->
                     <div class="simple-input-group">
-                        <div class="input-icon">📱</div>
+                        <label class="input-label">Contato:</label>
                         <input type="tel" id="whatsapp" name="whatsapp" required 
                                placeholder="WhatsApp (34) 99999-9999" 
                                class="simple-input">
@@ -123,15 +123,9 @@
                         <p class="confirmation-label">Vamos à festa?</p>
                         <div class="button-row">
                             <button type="button" class="confirmation-btn yes-btn" data-value="yes">
-                                <span class="btn-emoji">✅</span>
-                                <span class="btn-text">SIM!</span>
-                            </button>
-                            <button type="button" class="confirmation-btn maybe-btn" data-value="maybe">
-                                <span class="btn-emoji">🤔</span>
-                                <span class="btn-text">TALVEZ</span>
+                                <span class="btn-text">SIM</span>
                             </button>
                             <button type="button" class="confirmation-btn no-btn" data-value="no">
-                                <span class="btn-emoji">❌</span>
                                 <span class="btn-text">NÃO</span>
                             </button>
                         </div>
@@ -140,7 +134,6 @@
                     
                     <!-- Botão Enviar -->
                     <button type="submit" class="submit-btn-large" id="submitBtn">
-                        <span class="btn-emoji-large">🎉</span>
                         <span class="btn-text-large">ENVIAR</span>
                     </button>
                 </form>

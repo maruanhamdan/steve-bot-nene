@@ -78,7 +78,6 @@ function updateStats() {
     const stats = {
         total: allRSVPs.length,
         confirmed: allRSVPs.filter(r => r.confirmation === 'yes').length,
-        maybe: allRSVPs.filter(r => r.confirmation === 'maybe').length,
         declined: allRSVPs.filter(r => r.confirmation === 'no').length
     };
     
@@ -88,7 +87,6 @@ function updateStats() {
 function updateStatsDisplay(stats) {
     document.getElementById('statTotal').textContent = stats.total;
     document.getElementById('statConfirmed').textContent = stats.confirmed;
-    document.getElementById('statMaybe').textContent = stats.maybe;
     document.getElementById('statDeclined').textContent = stats.declined;
 }
 
@@ -111,10 +109,8 @@ function renderTable() {
             minute: '2-digit'
         });
         
-        const confirmationClass = rsvp.confirmation === 'yes' ? 'yes' : 
-                                 rsvp.confirmation === 'maybe' ? 'maybe' : 'no';
-        const confirmationText = rsvp.confirmation === 'yes' ? '✅ Sim' :
-                                rsvp.confirmation === 'maybe' ? '🤔 Talvez' : '❌ Não';
+        const confirmationClass = rsvp.confirmation === 'yes' ? 'yes' : 'no';
+        const confirmationText = rsvp.confirmation === 'yes' ? '✅ Sim' : '❌ Não';
         
         return `
             <tr>
@@ -233,7 +229,7 @@ function copyRSVP(id) {
     const rsvp = allRSVPs.find(r => r.id === id);
     if (!rsvp) return;
     
-    const text = `Criança: ${rsvp.childName}\nResponsável: ${rsvp.parentName}\nWhatsApp: ${rsvp.whatsapp}\nConfirmação: ${rsvp.confirmation === 'yes' ? 'Sim' : rsvp.confirmation === 'maybe' ? 'Talvez' : 'Não'}\n${rsvp.notes ? `Observações: ${rsvp.notes}` : ''}`;
+    const text = `Criança: ${rsvp.childName}\nResponsável: ${rsvp.parentName}\nWhatsApp: ${rsvp.whatsapp}\nConfirmação: ${rsvp.confirmation === 'yes' ? 'Sim' : 'Não'}\n${rsvp.notes ? `Observações: ${rsvp.notes}` : ''}`;
     
     navigator.clipboard.writeText(text).then(() => {
         alert('RSVP copiado para a área de transferência!');

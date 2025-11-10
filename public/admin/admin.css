@@ -161,6 +161,7 @@ body {
 }
 
 .stat-card.stat-maybe {
+    display: none;
     border-color: #FFC107;
 }
 
@@ -325,6 +326,7 @@ body {
 }
 
 .confirmation-badge.maybe {
+    display: none;
     background: rgba(255, 193, 7, 0.3);
     border-color: #FFC107;
     color: #FFC107;

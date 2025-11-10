@@ -64,30 +64,29 @@
             
             <!-- RSVP Form -->
             <div id="rsvpFormSequence" class="rsvp-form-sequence">
-                <h3>🎉 Confirmar Presença</h3>
+                <h3>Confirmar Presença</h3>
                 <form id="rsvpFormSequenceElement" class="simple-form-sequence">
                     <div class="simple-input-group-sequence">
-                        <div class="input-icon-sequence">👶</div>
+                        <label class="input-label-sequence">Convidado:</label>
                         <input type="text" id="childNameSequence" placeholder="Nome da criança" class="simple-input-sequence" required>
                     </div>
                     <div class="simple-input-group-sequence">
-                        <div class="input-icon-sequence">👤</div>
+                        <label class="input-label-sequence">Responsável:</label>
                         <input type="text" id="parentNameSequence" placeholder="Seu nome" class="simple-input-sequence" required>
                     </div>
                     <div class="simple-input-group-sequence">
-                        <div class="input-icon-sequence">📱</div>
-                        <input type="tel" id="whatsappSequence" placeholder="WhatsApp" class="simple-input-sequence" required>
+                        <label class="input-label-sequence">Contato:</label>
+                        <input type="tel" id="whatsappSequence" placeholder="WhatsApp (34) 99999-9999" class="simple-input-sequence" required>
                     </div>
                     <div class="confirmation-buttons-sequence">
                         <p>Vamos à festa?</p>
                         <div class="button-row-sequence">
-                            <button type="button" class="confirmation-btn-sequence yes-btn-sequence" data-value="yes">✅ SIM!</button>
-                            <button type="button" class="confirmation-btn-sequence maybe-btn-sequence" data-value="maybe">🤔 TALVEZ</button>
-                            <button type="button" class="confirmation-btn-sequence no-btn-sequence" data-value="no">❌ NÃO</button>
+                            <button type="button" class="confirmation-btn-sequence yes-btn-sequence" data-value="yes">SIM</button>
+                            <button type="button" class="confirmation-btn-sequence no-btn-sequence" data-value="no">NÃO</button>
                         </div>
                         <input type="hidden" id="confirmationSequence" required>
                     </div>
-                    <button type="submit" class="submit-btn-sequence" id="submitBtnSequence">🎉 ENVIAR</button>
+                    <button type="submit" class="submit-btn-sequence" id="submitBtnSequence">ENVIAR</button>
                 </form>
                 <div id="formSuccessSequence" class="form-success-sequence" style="display: none;">
                     <div class="success-icon-sequence">🎉✨</div>
