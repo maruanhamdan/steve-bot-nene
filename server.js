@@ -136,9 +136,9 @@ app.get('/', (req, res) => {
   res.redirect('/heitor');
 });
 
-// Rota /heitor - Página inicial do convite do Heitor
+// Rota /heitor - Página com vídeo e botão
 app.get('/heitor', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'invite', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'heitor.html'));
 });
 
 // Rota /invite-heitor - Mesmo que /invite mas com nome específico

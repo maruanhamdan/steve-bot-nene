@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="🎮 Convite Especial - Aniversário do Heitor!">
+    <meta property="og:description" content="Uma aventura Minecraft te espera! Minerar diamantes e descobrir o convite da festa! 17/12/2025 às 19h - Blue Moon, Uberlândia">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="Aniversário Heitor - Minecraft">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🎮 Convite Aniversário Heitor - Minecraft">
+    <meta name="twitter:description" content="Minerar diamantes e descobrir o convite! 17/12/2025 às 19h">
+    
+    <!-- WhatsApp specific -->
+    <meta name="theme-color" content="#1E3A5F">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>🎮 Convite Aniversário Heitor - Minecraft</title>
+    
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- SPLASH SCREEN -->
+    <div id="splash" class="splash-screen">
+        <div class="splash-content">
+            <h1 class="splash-title">HEITOR</h1>
+            <div class="video-container">
+                <video id="splashVideo" class="splash-video" controls autoplay>
+                    <source src="/steve-video.mp4" type="video/mp4">
+                </video>
+            </div>
+            <button id="enterInvite" class="enter-btn">🎮 DESCUBRIR O CONVITE</button>
+        </div>
+    </div>
+
+    <script>
+        // Botão leva para /invite
+        document.getElementById('enterInvite').addEventListener('click', () => {
+            window.location.href = '/invite';
+        });
+    </script>
+</body>
+</html>
