@@ -5,9 +5,12 @@ let currentPassword = '';
 let allRSVPs = [];
 let filteredRSVPs = [];
 
-// Login
+// Login - MELHORADO com debug
 document.getElementById('loginBtn').addEventListener('click', () => {
-    const password = document.getElementById('passwordInput').value;
+    const password = document.getElementById('passwordInput').value.trim();
+    console.log('Tentativa de login com senha:', password ? '***' : '(vazia)');
+    console.log('Senha esperada:', ADMIN_PASSWORD);
+    
     if (password === ADMIN_PASSWORD) {
         currentPassword = password;
         document.getElementById('loginScreen').style.display = 'none';
@@ -15,8 +18,9 @@ document.getElementById('loginBtn').addEventListener('click', () => {
         loadRSVPs();
     } else {
         const errorEl = document.getElementById('loginError');
-        errorEl.textContent = 'Senha incorreta!';
+        errorEl.textContent = 'Senha incorreta! Use: ' + ADMIN_PASSWORD;
         errorEl.style.display = 'block';
+        console.error('Login falhou. Senha digitada:', password, 'Esperada:', ADMIN_PASSWORD);
     }
 });
 
