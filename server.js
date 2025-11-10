@@ -128,7 +128,28 @@ function authenticateToken(req, res, next) {
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+
+// ==================== ROTAS ESPECÍFICAS (ANTES DO STATIC) ====================
+
+// Redirecionar página principal do Steve para /heitor
+app.get('/', (req, res) => {
+  res.redirect('/heitor');
+});
+
+// Rota /heitor - Página inicial do convite do Heitor
+app.get('/heitor', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'invite', 'index.html'));
+});
+
+// Rota /invite-heitor - Mesmo que /invite mas com nome específico
+app.get('/invite-heitor', (req, res) => {
+  res.redirect('/invite/index.html');
+});
+
+// Rota /admin-laila - Admin simples para Laila
+app.get('/admin-laila', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
+});
 
 // Route redirects for easier access
 app.get('/invite', (req, res) => {
@@ -152,27 +173,8 @@ app.get('/info', (req, res) => {
   res.redirect('/info.html');
 });
 
-// ==================== ROTAS PARA LAILA (HEITOR) ====================
-
-// Redirecionar página principal do Steve para /heitor
-app.get('/', (req, res) => {
-  res.redirect('/heitor');
-});
-
-// Rota /heitor - Página inicial do convite do Heitor
-app.get('/heitor', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'invite', 'index.html'));
-});
-
-// Rota /invite-heitor - Mesmo que /invite mas com nome específico
-app.get('/invite-heitor', (req, res) => {
-  res.redirect('/invite/index.html');
-});
-
-// Rota /admin-laila - Admin simples para Laila
-app.get('/admin-laila', (req, res) => {
-  res.redirect('/admin/dashboard.html');
-});
+// Servir arquivos estáticos (DEPOIS das rotas específicas)
+app.use(express.static('public'));
 
 // Lista de palavras/tópicos bloqueados para crianças
 const blockedKeywords = [
