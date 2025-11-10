@@ -41,7 +41,7 @@ function setupColorButtons() {
 function startNewLevel() {
     if (gameComplete) return;
     
-    // Adicionar nova cor à sequência
+    // Adicionar nova cor ALEATÓRIA à sequência
     const randomColor = COLORS[Math.floor(Math.random() * COLORS.length)];
     sequence.push(randomColor);
     
@@ -53,6 +53,43 @@ function startNewLevel() {
     
     // Mostrar sequência
     showSequence();
+}
+
+function resetGame() {
+    // Resetar tudo para jogar novamente
+    sequence = [];
+    playerSequence = [];
+    level = 1;
+    score = 0;
+    gameStartTime = null;
+    if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+    }
+    gameComplete = false;
+    isShowingSequence = false;
+    
+    // Resetar UI
+    document.getElementById('gameTimerSequence').textContent = '0s';
+    document.getElementById('gameLevel').textContent = '1';
+    document.getElementById('gameScoreSequence').textContent = '0';
+    
+    // Esconder convite
+    const reveal = document.getElementById('invitationRevealSequence');
+    if (reveal) {
+        reveal.style.display = 'none';
+    }
+    
+    // Mostrar elementos do jogo
+    document.getElementById('colorGrid').style.display = 'grid';
+    document.getElementById('sequenceDisplay').style.display = 'flex';
+    document.getElementById('instructionsSequence').style.display = 'block';
+    
+    // Limpar display
+    document.getElementById('sequenceDisplay').innerHTML = '';
+    
+    // Iniciar novo jogo
+    startNewLevel();
 }
 
 function showSequence() {
