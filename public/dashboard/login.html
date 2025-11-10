@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InviteManager Pro - Login</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>🎉 InviteManager Pro</h1>
+                <p>Crie convites interativos incríveis</p>
+            </div>
+
+            <div id="loginForm" class="auth-form">
+                <h2>Entrar</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button id="loginBtn" class="btn-primary">Entrar</button>
+                <p class="auth-switch">
+                    Não tem conta? <a href="#" id="showRegister">Criar conta</a>
+                </p>
+                <p id="loginError" class="error-message" style="display: none;"></p>
+            </div>
+
+            <div id="registerForm" class="auth-form" style="display: none;">
+                <h2>Criar Conta</h2>
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" id="registerName" placeholder="Seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres" required minlength="6">
+                </div>
+                <button id="registerBtn" class="btn-primary">Criar Conta</button>
+                <p class="auth-switch">
+                    Já tem conta? <a href="#" id="showLogin">Entrar</a>
+                </p>
+                <p id="registerError" class="error-message" style="display: none;"></p>
+                <p class="info-text">
+                    ✨ Você receberá 5 tokens grátis para começar!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InviteManager Pro</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>🎉 InviteManager Pro</h1>
+            <div class="user-info">
+                <div class="tokens-badge" id="tokensBadge">0 Tokens</div>
+                <span id="userName">Usuário</span>
+                <button id="logoutBtn" class="btn-action" style="background: #f44336; color: white;">Sair</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total de Convites</h3>
+                    <div class="value" id="totalInvites">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Convites Ativos</h3>
+                    <div class="value" id="activeInvites">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total de RSVPs</h3>
+                    <div class="value" id="totalRSVPs">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Confirmados</h3>
+                    <div class="value" id="confirmedRSVPs">0</div>
+                </div>
+            </div>
+
+            <!-- Invites List -->
+            <div class="invites-section">
+                <div class="section-header">
+                    <h2>Meus Convites</h2>
+                    <button class="btn-create" onclick="window.location.href='/dashboard/create.html'">
+                        + Criar Novo Convite
+                    </button>
+                </div>
+
+                <div id="invitesList" class="invites-list">
+                    <p style="text-align: center; color: #666; padding: 40px;">
+                        Carregando convites...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
