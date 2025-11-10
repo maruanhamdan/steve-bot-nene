@@ -193,8 +193,7 @@ document.getElementById('exportBtn').addEventListener('click', () => {
             minute: '2-digit'
         });
         
-        const confirmation = rsvp.confirmation === 'yes' ? 'Sim' :
-                           rsvp.confirmation === 'maybe' ? 'Talvez' : 'Não';
+        const confirmation = rsvp.confirmation === 'yes' ? 'Sim' : 'Não';
         
         return [
             dateStr,
