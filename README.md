@@ -6,12 +6,12 @@ Sistema completo com assistente virtual de Minecraft e convite interativo de ani
 
 ### Produção (Railway)
 - **Convite**: https://elegant-wonder-production.up.railway.app/invite
-- **Jogo Novo**: https://elegant-wonder-production.up.railway.app/invite/new
+- **Jogo Novo (Melhorado)**: https://elegant-wonder-production.up.railway.app/invite/new
 - **Admin**: https://elegant-wonder-production.up.railway.app/admin
 - **Info**: https://elegant-wonder-production.up.railway.app/info.html
 
 ### Credenciais
-- **Admin Password**: `heitor123`
+- **Admin Password**: `heitor123` (não está mais no placeholder por segurança)
 
 ## 📋 Funcionalidades
 
@@ -21,10 +21,13 @@ Sistema completo com assistente virtual de Minecraft e convite interativo de ani
 - IA integrada (Z.AI GLM-4.6)
 - Especialista em Minecraft
 
-### 🎮 Convite Interativo
-- Mini-game temático Minecraft
-- Coleta de itens
-- Animações e efeitos visuais
+### 🎮 Convite Interativo (v2.0)
+- **Grid 3x3** - Fácil para crianças
+- **8 Itens do Minecraft** para coletar
+- **Sons únicos** para cada item
+- **Animações melhoradas** - Partículas, celebrações, screen shake
+- **Visual renovado** - Cores vibrantes, gradientes
+- **Feedback constante** - Estatísticas em tempo real
 - Sistema de RSVP integrado
 - Design responsivo
 
