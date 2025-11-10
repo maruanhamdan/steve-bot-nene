@@ -102,13 +102,13 @@ function setupGameButtons() {
     // Start game button
     document.getElementById('startGame')?.addEventListener('click', () => {
         const inviteId = window.currentInviteId || '';
-        window.location.href = `game.html${inviteId ? '?inviteId=' + inviteId : ''}`;
+        window.location.href = `/invite/game.html${inviteId ? '?inviteId=' + inviteId : ''}`;
     });
 
     // Start sequence game button
     document.getElementById('startGameSequence')?.addEventListener('click', () => {
         const inviteId = window.currentInviteId || '';
-        window.location.href = `game-sequence.html${inviteId ? '?inviteId=' + inviteId : ''}`;
+        window.location.href = `/invite/game-sequence.html${inviteId ? '?inviteId=' + inviteId : ''}`;
     });
 }
 
