@@ -65,45 +65,67 @@
                 </div>
             </div>
 
-            <!-- RSVP Form -->
+            <!-- RSVP Form - SIMPLIFICADO -->
             <div id="rsvpForm" class="rsvp-form">
-                <h3 class="form-title">Confirmar Presença</h3>
-                <form id="rsvpFormElement">
-                    <div class="form-group">
-                        <label for="childName">Nome da Criança *</label>
-                        <input type="text" id="childName" name="childName" required placeholder="Ex: João">
+                <h3 class="form-title">🎉 Confirmar Presença</h3>
+                
+                <!-- Formulário Simplificado -->
+                <form id="rsvpFormElement" class="simple-form">
+                    <!-- Nome da Criança -->
+                    <div class="simple-input-group">
+                        <div class="input-icon">👶</div>
+                        <input type="text" id="childName" name="childName" required 
+                               placeholder="Nome da criança" 
+                               class="simple-input">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="parentName">Nome do Responsável *</label>
-                        <input type="text" id="parentName" name="parentName" required placeholder="Ex: Maria Silva">
+                    <!-- Nome do Responsável -->
+                    <div class="simple-input-group">
+                        <div class="input-icon">👤</div>
+                        <input type="text" id="parentName" name="parentName" required 
+                               placeholder="Seu nome" 
+                               class="simple-input">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="whatsapp">WhatsApp *</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(34) 99999-9999">
+                    <!-- WhatsApp -->
+                    <div class="simple-input-group">
+                        <div class="input-icon">📱</div>
+                        <input type="tel" id="whatsapp" name="whatsapp" required 
+                               placeholder="WhatsApp (34) 99999-9999" 
+                               class="simple-input">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="confirmation">Confirmação *</label>
-                        <select id="confirmation" name="confirmation" required>
-                            <option value="">Selecione...</option>
-                            <option value="yes">✅ Sim, vamos!</option>
-                            <option value="maybe">🤔 Talvez</option>
-                            <option value="no">❌ Não poderemos</option>
-                        </select>
+                    <!-- Confirmação - BOTÕES GRANDES -->
+                    <div class="confirmation-buttons">
+                        <p class="confirmation-label">Vamos à festa?</p>
+                        <div class="button-row">
+                            <button type="button" class="confirmation-btn yes-btn" data-value="yes">
+                                <span class="btn-emoji">✅</span>
+                                <span class="btn-text">SIM!</span>
+                            </button>
+                            <button type="button" class="confirmation-btn maybe-btn" data-value="maybe">
+                                <span class="btn-emoji">🤔</span>
+                                <span class="btn-text">TALVEZ</span>
+                            </button>
+                            <button type="button" class="confirmation-btn no-btn" data-value="no">
+                                <span class="btn-emoji">❌</span>
+                                <span class="btn-text">NÃO</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="confirmation" name="confirmation" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="notes">Observações (opcional)</label>
-                        <textarea id="notes" name="notes" rows="3" placeholder="Alguma informação adicional?"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">🎉 CONFIRMAR</button>
+                    <!-- Botão Enviar -->
+                    <button type="submit" class="submit-btn-large" id="submitBtn">
+                        <span class="btn-emoji-large">🎉</span>
+                        <span class="btn-text-large">ENVIAR</span>
+                    </button>
                 </form>
                 
-                <div id="formSuccess" class="form-success" style="display: none;">
-                    <p>✅ Confirmação enviada com sucesso!</p>
+                <!-- Sucesso -->
+                <div id="formSuccess" class="form-success-large" style="display: none;">
+                    <div class="success-icon">🎉✨</div>
+                    <h3>Confirmado!</h3>
                     <p>Nos vemos na festa! 🎮</p>
                 </div>
             </div>

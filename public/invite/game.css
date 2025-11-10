@@ -56,13 +56,13 @@ body {
     text-shadow: 2px 2px 0px #000;
 }
 
-/* Block Grid */
+/* Block Grid - REDUZIDO PARA 4x4 */
 .block-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
     margin-bottom: 30px;
-    max-width: 500px;
+    max-width: 450px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -254,96 +254,235 @@ body {
     text-shadow: 1px 1px 0px #000;
 }
 
-/* RSVP Form */
+/* RSVP Form - SIMPLIFICADO E MELHORADO */
 .rsvp-form {
     margin-top: 30px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
     border: 4px solid #8B7355;
-    padding: 25px;
+    padding: 30px 20px;
     box-shadow: 0 8px 0 #6B5A45;
+    border-radius: 0;
 }
 
 .form-title {
+    font-size: 20px;
+    margin-bottom: 25px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+    text-align: center;
+}
+
+/* Formulário Simplificado */
+.simple-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.simple-input-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border: 3px solid #8B7355;
+    border-radius: 0;
+}
+
+.input-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    filter: drop-shadow(2px 2px 0px #000);
+}
+
+.simple-input {
+    flex: 1;
+    padding: 18px 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 18px;
-    margin-bottom: 20px;
+    background: rgba(255,255,255,0.95);
+    border: none;
+    border-radius: 8px;
+    color: #333;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.simple-input:focus {
+    outline: 3px solid #4CAF50;
+    background: #fff;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
+
+.simple-input::placeholder {
+    color: #999;
+    font-size: 16px;
+}
+
+/* Botões de Confirmação - GRANDES E VISUAIS */
+.confirmation-buttons {
+    margin: 20px 0;
+}
+
+.confirmation-label {
+    font-size: 16px;
     color: #FFD700;
+    text-align: center;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 0px #000;
+    font-weight: 600;
 }
 
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
+.button-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.form-group label {
-    display: block;
-    font-size: 11px;
-    margin-bottom: 8px;
-    color: #FFD700;
-    text-shadow: 1px 1px 0px #000;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    background: #2E2E2E;
-    border: 3px solid #6B5A45;
-    color: #fff;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4CAF50;
-    box-shadow: 
-        inset 0 2px 5px rgba(0,0,0,0.5),
-        0 0 10px #4CAF50;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-.submit-btn {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px;
-    padding: 18px 30px;
-    background: #4CAF50;
-    color: #fff;
-    border: 4px solid #2E7D32;
-    border-top-color: #66BB6A;
-    border-left-color: #2E7D32;
+.confirmation-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 25px 20px;
+    border: 4px solid;
+    border-radius: 12px;
     cursor: pointer;
-    text-shadow: 2px 2px 0px #000;
-    box-shadow: 0 6px 0 #1B5E20, inset 0 2px 0 rgba(255,255,255,0.3);
-    transition: all 0.1s;
-    width: 100%;
-    margin-top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.3);
+    background: rgba(255,255,255,0.95);
 }
 
-.submit-btn:active {
+.confirmation-btn:active {
     transform: translateY(4px);
-    box-shadow: 0 2px 0 #1B5E20, inset 0 2px 0 rgba(255,255,255,0.3);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.3);
 }
 
-.submit-btn:hover {
-    background: #66BB6A;
+.yes-btn {
+    border-color: #4CAF50;
+    color: #2E7D32;
 }
 
-.form-success {
+.yes-btn:hover, .yes-btn.selected {
+    background: #4CAF50;
+    color: white;
+    transform: scale(1.05);
+}
+
+.maybe-btn {
+    border-color: #FFC107;
+    color: #F57C00;
+}
+
+.maybe-btn:hover, .maybe-btn.selected {
+    background: #FFC107;
+    color: white;
+    transform: scale(1.05);
+}
+
+.no-btn {
+    border-color: #f44336;
+    color: #c62828;
+}
+
+.no-btn:hover, .no-btn.selected {
+    background: #f44336;
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn-emoji {
+    font-size: 40px;
+    line-height: 1;
+}
+
+.btn-text {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Botão Enviar Grande */
+.submit-btn-large {
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    border: 4px solid #2E7D32;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    box-shadow: 0 8px 0 #1B5E20, 0 0 20px rgba(76, 175, 80, 0.4);
+    transition: all 0.2s;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+.submit-btn-large:active {
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 #1B5E20;
+}
+
+.submit-btn-large:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 0 #1B5E20, 0 0 30px rgba(76, 175, 80, 0.6);
+}
+
+.submit-btn-large:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-emoji-large {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.btn-text-large {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Sucesso Grande */
+.form-success-large {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(102, 187, 106, 0.3) 100%);
+    border: 4px solid #4CAF50;
+    border-radius: 12px;
     margin-top: 20px;
-    padding: 20px;
-    background: rgba(76, 175, 80, 0.2);
-    border: 3px solid #4CAF50;
-    font-size: 12px;
-    line-height: 1.8;
+}
+
+.success-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+.form-success-large h3 {
+    font-size: 28px;
+    color: #4CAF50;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #000;
+    font-weight: 700;
+}
+
+.form-success-large p {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 0px #000;
 }
 
 /* Screen Shake Animation */
@@ -357,6 +496,26 @@ body {
     animation: shake 0.5s;
 }
 
+/* Mini Celebração */
+@keyframes miniCelebration {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1) translateY(-50px);
+    }
+}
+
+.mini-celebration {
+    animation: miniCelebration 1s ease-out forwards;
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .game-title {
@@ -364,7 +523,7 @@ body {
     }
     
     .block-grid {
-        gap: 8px;
+        gap: 10px;
     }
     
     .reveal-title {
@@ -376,7 +535,20 @@ body {
     }
     
     .form-title {
-        font-size: 16px;
+        font-size: 18px;
+    }
+    
+    .confirmation-btn {
+        min-width: 80px;
+        padding: 20px 15px;
+    }
+    
+    .btn-emoji {
+        font-size: 32px;
+    }
+    
+    .btn-text {
+        font-size: 12px;
     }
 }
 
@@ -386,7 +558,7 @@ body {
     }
     
     .block-grid {
-        gap: 6px;
+        gap: 8px;
     }
     
     .invitation-card {
@@ -394,6 +566,45 @@ body {
     }
     
     .rsvp-form {
+        padding: 20px 15px;
+    }
+    
+    .simple-input {
+        font-size: 16px;
+        padding: 15px 12px;
+    }
+    
+    .input-icon {
+        font-size: 28px;
+    }
+    
+    .button-row {
+        gap: 10px;
+    }
+    
+    .confirmation-btn {
+        min-width: 70px;
+        padding: 18px 12px;
+    }
+    
+    .btn-emoji {
+        font-size: 28px;
+    }
+    
+    .btn-text {
+        font-size: 11px;
+    }
+    
+    .submit-btn-large {
         padding: 20px;
+        font-size: 18px;
+    }
+    
+    .btn-emoji-large {
+        font-size: 28px;
+    }
+    
+    .btn-text-large {
+        font-size: 16px;
     }
 }

@@ -1,10 +1,11 @@
-// Game Configuration
-const GRID_SIZE = 5;
+// Game Configuration - MELHORADO
+const GRID_SIZE = 4; // Reduzido de 5 para 4 (mais fácil)
 const TOTAL_BLOCKS = GRID_SIZE * GRID_SIZE;
-// Random diamond position (different each time)
-const DIAMOND_BLOCK_INDEX = Math.floor(Math.random() * TOTAL_BLOCKS);
+// Diamond sempre em posição fixa para facilitar (último bloco)
+const DIAMOND_BLOCK_INDEX = TOTAL_BLOCKS - 1; // Último bloco sempre tem o diamante
 let blocksMined = 0;
 let gameComplete = false;
+let selectedConfirmation = null; // Para o formulário simplificado
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,33 +34,43 @@ function createBlockGrid() {
     }
 }
 
-// Mine a block
+// Mine a block - MELHORADO com mais feedback
 function mineBlock(block, index) {
     if (block.classList.contains('mined') || gameComplete) return;
     
     // Add mined class with animation
-    block.style.transition = 'all 0.2s ease-out';
+    block.style.transition = 'all 0.15s ease-out';
     block.classList.add('mined');
     blocksMined++;
     
-    // Play sound effect
+    // Play sound effect (mais variado)
     playSound('break');
     
-    // Create particle effect
-    createParticles(block);
+    // Create MORE particles (mais visual)
+    createParticles(block, 8); // Aumentado de 5 para 8
+    
+    // Haptic feedback (se disponível)
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
     
     // Check if it's the diamond block
     if (block.dataset.isDiamond === 'true') {
         setTimeout(() => {
             revealDiamond(block);
-        }, 300);
+        }, 200); // Mais rápido
     }
     
-    // Update progress
+    // Update progress with animation
     updateProgress();
+    
+    // Show mini celebration every 4 blocks
+    if (blocksMined % 4 === 0 && !gameComplete) {
+        showMiniCelebration();
+    }
 }
 
-// Reveal diamond and invitation
+// Reveal diamond and invitation - MELHORADO
 function revealDiamond(block) {
     gameComplete = true;
     
@@ -69,19 +80,31 @@ function revealDiamond(block) {
     // Play celebration sound
     playSound('diamond');
     
-    // Screen shake
+    // Screen shake mais intenso
     document.body.classList.add('shake');
     setTimeout(() => {
         document.body.classList.remove('shake');
-    }, 500);
+    }, 600);
     
     // Play success sound
     playSound('success');
     
-    // Show invitation after delay
+    // MEGA celebração visual
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            createParticles(block, 12);
+        }, i * 50);
+    }
+    
+    // Haptic feedback intenso
+    if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200, 100, 200]);
+    }
+    
+    // Show invitation after delay (mais rápido)
     setTimeout(() => {
         showInvitation();
-    }, 1500);
+    }, 1000);
 }
 
 // Show invitation reveal
@@ -103,20 +126,26 @@ function showInvitation() {
     }, 500);
 }
 
-// Create particle effects
-function createParticles(block) {
+// Create particle effects - MELHORADO
+function createParticles(block, count = 8) {
     const rect = block.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < count; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        const angle = (Math.PI * 2 * i) / 5;
-        const distance = 30 + Math.random() * 20;
+        const angle = (Math.PI * 2 * i) / count;
+        const distance = 40 + Math.random() * 30; // Mais distância
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance;
+        
+        // Cores variadas
+        const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#95E1D3'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.width = (8 + Math.random() * 4) + 'px';
+        particle.style.height = particle.style.width;
         
         particle.style.left = centerX + 'px';
         particle.style.top = centerY + 'px';
@@ -127,14 +156,53 @@ function createParticles(block) {
         
         setTimeout(() => {
             particle.remove();
-        }, 1000);
+        }, 1200);
     }
 }
 
-// Update progress bar
+// Mini celebração durante o jogo
+function showMiniCelebration() {
+    const celebration = document.createElement('div');
+    celebration.className = 'mini-celebration';
+    celebration.textContent = '🎉';
+    celebration.style.position = 'fixed';
+    celebration.style.top = '50%';
+    celebration.style.left = '50%';
+    celebration.style.transform = 'translate(-50%, -50%)';
+    celebration.style.fontSize = '60px';
+    celebration.style.zIndex = '10000';
+    celebration.style.pointerEvents = 'none';
+    celebration.style.animation = 'miniCelebration 1s ease-out forwards';
+    
+    document.body.appendChild(celebration);
+    
+    setTimeout(() => {
+        celebration.remove();
+    }, 1000);
+}
+
+// Update progress bar - MELHORADO com animação
 function updateProgress() {
     const progress = (blocksMined / TOTAL_BLOCKS) * 100;
-    document.getElementById('progress').style.width = progress + '%';
+    const progressBar = document.getElementById('progress');
+    
+    // Animação suave
+    progressBar.style.transition = 'width 0.3s ease-out';
+    progressBar.style.width = progress + '%';
+    
+    // Mudança de cor conforme progresso
+    if (progress < 33) {
+        progressBar.style.background = 'linear-gradient(90deg, #f44336 0%, #e57373 100%)';
+    } else if (progress < 66) {
+        progressBar.style.background = 'linear-gradient(90deg, #FFC107 0%, #FFD54F 100%)';
+    } else {
+        progressBar.style.background = 'linear-gradient(90deg, #4CAF50 0%, #66BB6A 100%)';
+    }
+    
+    // Efeito de brilho quando próximo do fim
+    if (progress > 80) {
+        progressBar.style.boxShadow = '0 0 20px #4CAF50, 0 0 40px #4CAF50';
+    }
 }
 
 // Enhanced Minecraft-style sound effects
@@ -216,7 +284,31 @@ document.addEventListener('click', () => {
     initAudioContext();
 }, { once: true });
 
-// RSVP Form Handling
+// RSVP Form Handling - SIMPLIFICADO
+// Botões de confirmação
+document.querySelectorAll('.confirmation-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove seleção anterior
+        document.querySelectorAll('.confirmation-btn').forEach(b => {
+            b.classList.remove('selected');
+        });
+        
+        // Seleciona atual
+        btn.classList.add('selected');
+        selectedConfirmation = btn.dataset.value;
+        document.getElementById('confirmation').value = selectedConfirmation;
+        
+        // Haptic feedback
+        if (navigator.vibrate) {
+            navigator.vibrate(30);
+        }
+        
+        // Sound
+        playSound('success');
+    });
+});
+
+// Submit form
 document.getElementById('rsvpFormElement').addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -225,20 +317,27 @@ document.getElementById('rsvpFormElement').addEventListener('submit', async (e) 
         parentName: document.getElementById('parentName').value.trim(),
         whatsapp: document.getElementById('whatsapp').value.trim(),
         confirmation: document.getElementById('confirmation').value,
-        notes: document.getElementById('notes').value.trim() || null,
+        notes: null, // Removido campo de observações
         timestamp: new Date().toISOString()
     };
     
     // Validate
     if (!formData.childName || !formData.parentName || !formData.whatsapp || !formData.confirmation) {
-        alert('Por favor, preencha todos os campos obrigatórios!');
+        // Visual feedback ao invés de alert
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.classList.add('shake');
+        submitBtn.innerHTML = '<span class="btn-emoji-large">⚠️</span><span class="btn-text-large">PREENCHA TUDO!</span>';
+        setTimeout(() => {
+            submitBtn.classList.remove('shake');
+            submitBtn.innerHTML = '<span class="btn-emoji-large">🎉</span><span class="btn-text-large">ENVIAR</span>';
+        }, 2000);
         return;
     }
     
     // Disable form
-    const submitBtn = document.querySelector('.submit-btn');
+    const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
-    submitBtn.textContent = '⏳ ENVIANDO...';
+    submitBtn.innerHTML = '<span class="btn-emoji-large">⏳</span><span class="btn-text-large">ENVIANDO...</span>';
     
     try {
         const response = await fetch('/api/invite/rsvp', {
@@ -259,6 +358,11 @@ document.getElementById('rsvpFormElement').addEventListener('submit', async (e) 
             // Play celebration sound
             playSound('diamond');
             
+            // Haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
             // Scroll to success message
             document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
@@ -266,9 +370,11 @@ document.getElementById('rsvpFormElement').addEventListener('submit', async (e) 
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Erro ao enviar confirmação. Tente novamente!');
         submitBtn.disabled = false;
-        submitBtn.textContent = '🎉 CONFIRMAR';
+        submitBtn.innerHTML = '<span class="btn-emoji-large">❌</span><span class="btn-text-large">TENTAR NOVAMENTE</span>';
+        setTimeout(() => {
+            submitBtn.innerHTML = '<span class="btn-emoji-large">🎉</span><span class="btn-text-large">ENVIAR</span>';
+        }, 3000);
     }
 });
 
