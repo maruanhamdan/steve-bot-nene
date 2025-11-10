@@ -21,15 +21,28 @@ Sistema completo com assistente virtual de Minecraft e convite interativo de ani
 - IA integrada (Z.AI GLM-4.6)
 - Especialista em Minecraft
 
-### 🎮 Convite Interativo (v2.0)
-- **Grid 3x3** - Fácil para crianças
-- **8 Itens do Minecraft** para coletar
-- **Sons únicos** para cada item
-- **Animações melhoradas** - Partículas, celebrações, screen shake
-- **Visual renovado** - Cores vibrantes, gradientes
-- **Feedback constante** - Estatísticas em tempo real
+### 🎮 Convite Interativo - 2 Jogos Competitivos!
+
+#### ⛏️ Minerador Pro
+- **Grid 4x4** - Mineração de blocos
+- **Sistema de pontuação** - Baseado em tempo e blocos usados
+- **Sons melhorados** - Quebra de blocos, picareta, descoberta de diamante
+- **Timer em tempo real** - Competição de velocidade
+- **Leaderboard** - Top 5 jogadores
 - Sistema de RSVP integrado
-- Design responsivo
+
+#### 🎯 Sequência Master
+- **Jogo de memória** - Repetir sequência de cores
+- **10 níveis** - Dificuldade progressiva
+- **Sistema de pontuação** - Baseado em nível e tempo
+- **Sons por cor** - Feedback auditivo único
+- **Leaderboard** - Top 5 jogadores
+- Sistema de RSVP integrado
+
+**Recursos Comuns:**
+- Nome do convidado preenchido automaticamente
+- Competição entre jogadores
+- Design responsivo e moderno
 
 ### 📊 Admin Dashboard
 - Visualização de RSVPs
