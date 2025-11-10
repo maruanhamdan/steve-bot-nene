@@ -25,10 +25,14 @@ const MINECRAFT_ITEMS = [
 
 // Inicializar jogo
 document.addEventListener('DOMContentLoaded', () => {
-    createBlockGrid();
-    updateProgress();
-    initAudioContext();
-    startBackgroundMusic();
+    try {
+        createBlockGrid();
+        updateProgress();
+        initAudioContext();
+        startBackgroundMusic();
+    } catch (error) {
+        console.error('Erro ao inicializar jogo:', error);
+    }
 });
 
 // Criar grid de blocos
@@ -40,9 +44,9 @@ function createBlockGrid() {
     const indices = Array.from({ length: TOTAL_BLOCKS }, (_, i) => i);
     shuffleArray(indices);
     
-    // Distribuir itens
-    const itemIndices = indices.slice(0, ITEMS_TO_COLLECT);
-    const diamondIndex = indices[ITEMS_TO_COLLECT]; // Último item é sempre o diamante
+    // Distribuir itens (garantir que temos espaço suficiente)
+    const itemIndices = indices.slice(0, Math.min(ITEMS_TO_COLLECT, TOTAL_BLOCKS - 1));
+    const diamondIndex = indices[itemIndices.length]; // Próximo índice após os itens
     
     for (let i = 0; i < TOTAL_BLOCKS; i++) {
         const block = document.createElement('div');
@@ -52,10 +56,14 @@ function createBlockGrid() {
         // Determinar conteúdo do bloco
         if (itemIndices.includes(i)) {
             const itemIndex = itemIndices.indexOf(i);
-            block.dataset.itemType = 'item';
-            block.dataset.itemIndex = itemIndex;
-            block.dataset.emoji = MINECRAFT_ITEMS[itemIndex].emoji;
-            block.dataset.itemName = MINECRAFT_ITEMS[itemIndex].name;
+            if (itemIndex < MINECRAFT_ITEMS.length) {
+                block.dataset.itemType = 'item';
+                block.dataset.itemIndex = itemIndex;
+                block.dataset.emoji = MINECRAFT_ITEMS[itemIndex].emoji;
+                block.dataset.itemName = MINECRAFT_ITEMS[itemIndex].name;
+            } else {
+                block.dataset.itemType = 'empty';
+            }
         } else if (i === diamondIndex) {
             block.dataset.itemType = 'diamond';
             block.dataset.emoji = '💎';
@@ -98,27 +106,29 @@ function collectBlock(block, index) {
     // Feedback visual e sonoro baseado no tipo
     if (itemType === 'item') {
         const itemIndex = parseInt(block.dataset.itemIndex);
-        const item = MINECRAFT_ITEMS[itemIndex];
-        
-        itemsCollected++;
-        collectedItems.push(item);
-        
-        // Som específico do item
-        playItemSound(item.sound);
-        
-        // Partículas coloridas
-        createItemParticles(block, item.color, item.emoji);
-        
-        // Mostrar celebração
-        showCelebration(item.emoji, `${item.name} Coletado!`);
-        
-        // Vibração
-        if (navigator.vibrate) {
-            navigator.vibrate([50, 30, 50]);
+        if (itemIndex >= 0 && itemIndex < MINECRAFT_ITEMS.length) {
+            const item = MINECRAFT_ITEMS[itemIndex];
+            
+            itemsCollected++;
+            collectedItems.push(item);
+            
+            // Som específico do item
+            playItemSound(item.sound);
+            
+            // Partículas coloridas
+            createItemParticles(block, item.color, item.emoji);
+            
+            // Mostrar celebração
+            showCelebration(item.emoji, `${item.name} Coletado!`);
+            
+            // Vibração
+            if (navigator.vibrate) {
+                navigator.vibrate([50, 30, 50]);
+            }
+            
+            // Atualizar UI
+            updateProgress();
         }
-        
-        // Atualizar UI
-        updateProgress();
         
     } else if (itemType === 'diamond') {
         // DIAMANTE ENCONTRADO!
@@ -164,15 +174,21 @@ function collectBlock(block, index) {
 
 // Revelar convite
 function revealInvitation() {
-    document.getElementById('invitationRevealNew').style.display = 'block';
-    document.getElementById('invitationRevealNew').scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-    });
+    const invitationEl = document.getElementById('invitationRevealNew');
+    const gridEl = document.getElementById('blockGridNew');
+    const instructionsEl = document.getElementById('instructions');
     
-    // Esconder grid
-    document.getElementById('blockGridNew').style.display = 'none';
-    document.getElementById('instructions').style.display = 'none';
+    if (invitationEl) {
+        invitationEl.style.display = 'block';
+        invitationEl.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }
+    
+    // Esconder grid e instruções
+    if (gridEl) gridEl.style.display = 'none';
+    if (instructionsEl) instructionsEl.style.display = 'none';
     
     // Tocar som de sucesso final
     playSuccessSound();
@@ -182,23 +198,29 @@ function revealInvitation() {
 function updateProgress() {
     const totalItems = ITEMS_TO_COLLECT + 1; // 8 itens + 1 diamante
     const collected = itemsCollected + diamondsFound;
-    const progress = (collected / totalItems) * 100;
+    const progress = Math.min((collected / totalItems) * 100, 100);
     
-    document.getElementById('progressNew').style.width = progress + '%';
-    document.getElementById('itemsCollected').textContent = itemsCollected;
-    document.getElementById('diamondsFound').textContent = diamondsFound;
+    const progressEl = document.getElementById('progressNew');
+    const itemsEl = document.getElementById('itemsCollected');
+    const diamondsEl = document.getElementById('diamondsFound');
+    
+    if (progressEl) progressEl.style.width = progress + '%';
+    if (itemsEl) itemsEl.textContent = itemsCollected;
+    if (diamondsEl) diamondsEl.textContent = diamondsFound;
     
     // Mudar cor da barra baseado no progresso
     const progressBar = document.getElementById('progressNew');
-    if (progress < 30) {
-        progressBar.style.background = 'linear-gradient(90deg, #f44336 0%, #e57373 100%)';
-    } else if (progress < 70) {
-        progressBar.style.background = 'linear-gradient(90deg, #FFC107 0%, #FFD54F 100%)';
-    } else if (progress < 100) {
-        progressBar.style.background = 'linear-gradient(90deg, #4CAF50 0%, #66BB6A 100%)';
-    } else {
-        progressBar.style.background = 'linear-gradient(90deg, #00CED1 0%, #00FFFF 100%)';
-        progressBar.style.boxShadow = '0 0 30px rgba(0, 206, 209, 0.8)';
+    if (progressBar) {
+        if (progress < 30) {
+            progressBar.style.background = 'linear-gradient(90deg, #f44336 0%, #e57373 100%)';
+        } else if (progress < 70) {
+            progressBar.style.background = 'linear-gradient(90deg, #FFC107 0%, #FFD54F 100%)';
+        } else if (progress < 100) {
+            progressBar.style.background = 'linear-gradient(90deg, #4CAF50 0%, #66BB6A 100%)';
+        } else {
+            progressBar.style.background = 'linear-gradient(90deg, #00CED1 0%, #00FFFF 100%)';
+            progressBar.style.boxShadow = '0 0 30px rgba(0, 206, 209, 0.8)';
+        }
     }
 }
 
@@ -207,6 +229,8 @@ function showCelebration(emoji, text) {
     const overlay = document.getElementById('celebrationOverlay');
     const emojiEl = document.getElementById('celebrationEmoji');
     const textEl = document.getElementById('celebrationText');
+    
+    if (!overlay || !emojiEl || !textEl) return;
     
     emojiEl.textContent = emoji;
     textEl.textContent = text;
@@ -581,23 +605,44 @@ document.addEventListener('click', () => {
 }, { once: true });
 
 // ========== FORMULÁRIO RSVP ==========
-document.querySelectorAll('.confirmation-btn-new').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.confirmation-btn-new').forEach(b => {
-            b.classList.remove('selected');
+// Aguardar DOM estar pronto
+document.addEventListener('DOMContentLoaded', () => {
+    const confirmationBtns = document.querySelectorAll('.confirmation-btn-new');
+    const rsvpForm = document.getElementById('rsvpFormNewElement');
+    
+    if (confirmationBtns.length > 0) {
+        confirmationBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.confirmation-btn-new').forEach(b => {
+                    b.classList.remove('selected');
+                });
+                btn.classList.add('selected');
+                selectedConfirmation = btn.dataset.value;
+                const confirmationInput = document.getElementById('confirmationNew');
+                if (confirmationInput) {
+                    confirmationInput.value = selectedConfirmation;
+                }
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate(30);
+                }
+                playItemSound('pickaxe');
+            });
         });
-        btn.classList.add('selected');
-        selectedConfirmation = btn.dataset.value;
-        document.getElementById('confirmationNew').value = selectedConfirmation;
-        
-        if (navigator.vibrate) {
-            navigator.vibrate(30);
-        }
-        playItemSound('pickaxe');
-    });
+    }
+    
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', handleRSVPSubmit);
+    }
+    
+    // Formatar WhatsApp
+    const whatsappInput = document.getElementById('whatsappNew');
+    if (whatsappInput) {
+        whatsappInput.addEventListener('input', formatWhatsApp);
+    }
 });
 
-document.getElementById('rsvpFormNewElement').addEventListener('submit', async (e) => {
+async function handleRSVPSubmit(e) {
     e.preventDefault();
     
     const formData = {
@@ -651,10 +696,9 @@ document.getElementById('rsvpFormNewElement').addEventListener('submit', async (
             submitBtn.innerHTML = '<span class="btn-emoji-new">🎉</span><span class="btn-text-new">ENVIAR</span>';
         }, 3000);
     }
-});
+}
 
-// Formatar WhatsApp
-document.getElementById('whatsappNew').addEventListener('input', (e) => {
+function formatWhatsApp(e) {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 0) {
         if (value.length <= 2) {
@@ -666,5 +710,5 @@ document.getElementById('whatsappNew').addEventListener('input', (e) => {
         }
     }
     e.target.value = value;
-});
+}
 
