@@ -466,7 +466,7 @@ app.post('/api/leaderboard/score', async (req, res) => {
     }
     
     const leaderboard = await readLeaderboard();
-    const gameKey = gameType === 'minerador' ? 'game1' : 'game2';
+    const gameKey = (gameType === 'minerador') ? 'game1' : 'game2';
     
     const entry = {
       id: Date.now().toString(),
