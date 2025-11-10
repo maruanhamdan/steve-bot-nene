@@ -339,6 +339,33 @@ body {
     animation: bounce 1s infinite;
 }
 
+.play-again-btn-sequence {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 4px solid #5a67d8;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 0 #4c51bf;
+    transition: all 0.2s;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.play-again-btn-sequence:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #4c51bf;
+}
+
+.play-again-btn-sequence:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #4c51bf;
+}
+
 @media (max-width: 480px) {
     .game-title-sequence {
         font-size: 22px;

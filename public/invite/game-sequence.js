@@ -59,9 +59,22 @@ function showSequence() {
     const display = document.getElementById('sequenceDisplay');
     display.innerHTML = '';
     
+    // Mostrar TODA a sequência primeiro
+    sequence.forEach((color, idx) => {
+        const item = document.createElement('div');
+        item.className = 'sequence-item';
+        item.style.background = getColorValue(color);
+        item.style.borderColor = '#fff';
+        item.style.opacity = '0.5';
+        display.appendChild(item);
+    });
+    
+    // Depois animar cada item da sequência
     let index = 0;
     const showNext = () => {
         if (index >= sequence.length) {
+            // Limpar display
+            display.innerHTML = '';
             isShowingSequence = false;
             enableButtons();
             updateInstruction('Sua vez! Repita a sequência!');
@@ -69,32 +82,29 @@ function showSequence() {
         }
         
         const color = sequence[index];
-        const item = document.createElement('div');
-        item.className = 'sequence-item';
-        item.style.background = getColorValue(color);
-        item.style.borderColor = '#fff';
-        display.appendChild(item);
+        const items = display.querySelectorAll('.sequence-item');
         
-        // Animação
-        setTimeout(() => {
-            item.classList.add('active');
+        // Destacar o item atual
+        if (items[index]) {
+            items[index].classList.add('active');
+            items[index].style.opacity = '1';
             playColorSound(color);
             if (navigator.vibrate) {
                 navigator.vibrate(50);
             }
-        }, 100);
-        
-        setTimeout(() => {
-            item.classList.remove('active');
-            display.removeChild(item);
-        }, 600);
+            
+            setTimeout(() => {
+                items[index].classList.remove('active');
+                items[index].style.opacity = '0.5';
+            }, 600);
+        }
         
         index++;
-        setTimeout(showNext, 700);
+        setTimeout(showNext, 800);
     };
     
     updateInstruction(`Nível ${level} - Observe a sequência!`);
-    showNext();
+    setTimeout(showNext, 500); // Começar após 500ms
 }
 
 function handleColorClick(color) {
@@ -250,12 +260,24 @@ function showMegaCelebration() {
 }
 
 function revealInvitation() {
-    document.getElementById('invitationRevealSequence').style.display = 'block';
+    const reveal = document.getElementById('invitationRevealSequence');
+    reveal.style.display = 'block';
+    
+    // Adicionar botão de jogar novamente
+    if (!document.getElementById('playAgainBtnSequence')) {
+        const playAgainBtn = document.createElement('button');
+        playAgainBtn.id = 'playAgainBtnSequence';
+        playAgainBtn.className = 'play-again-btn-sequence';
+        playAgainBtn.textContent = '🔄 JOGAR NOVAMENTE';
+        playAgainBtn.onclick = resetGame;
+        reveal.insertBefore(playAgainBtn, reveal.firstChild);
+    }
+    
     document.getElementById('colorGrid').style.display = 'none';
     document.getElementById('sequenceDisplay').style.display = 'none';
     document.getElementById('instructionsSequence').style.display = 'none';
     
-    document.getElementById('invitationRevealSequence').scrollIntoView({
+    reveal.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
     });

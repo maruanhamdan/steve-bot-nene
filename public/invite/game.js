@@ -1,7 +1,7 @@
 // ⛏️ MINERADOR PRO - Jogo com Pontuação e Leaderboard
 const GRID_SIZE = 4;
 const TOTAL_BLOCKS = GRID_SIZE * GRID_SIZE;
-const DIAMOND_BLOCK_INDEX = TOTAL_BLOCKS - 1;
+let diamondBlockIndex = -1; // Será definido aleatoriamente
 let blocksMined = 0;
 let gameComplete = false;
 let selectedConfirmation = null;
@@ -20,13 +20,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nameInput) nameInput.value = playerName;
     }
     
+    startNewGame();
+    loadLeaderboard();
+});
+
+function startNewGame() {
+    // Resetar variáveis
+    blocksMined = 0;
+    gameComplete = false;
+    gameStartTime = null;
+    if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+    }
+    
+    // Diamante em posição ALEATÓRIA
+    diamondBlockIndex = Math.floor(Math.random() * TOTAL_BLOCKS);
+    
+    // Resetar UI
+    document.getElementById('gameTimer').textContent = '0s';
+    document.getElementById('blocksCount').textContent = '0';
+    document.getElementById('gameScore').textContent = '0';
+    document.getElementById('progress').style.width = '0%';
+    
+    // Esconder convite se estiver visível
+    const reveal = document.getElementById('invitationReveal');
+    if (reveal) {
+        reveal.style.display = 'none';
+    }
+    
+    // Mostrar grid novamente
+    const grid = document.getElementById('blockGrid');
+    grid.style.display = 'grid';
+    grid.style.opacity = '1';
+    grid.style.transform = 'scale(1)';
+    
     createBlockGrid();
     updateProgress();
-    loadLeaderboard();
     
     // Iniciar timer quando primeiro bloco for clicado
-    document.getElementById('blockGrid').addEventListener('click', startTimer, { once: true });
-});
+    grid.addEventListener('click', startTimer, { once: true });
+}
 
 function startTimer() {
     gameStartTime = Date.now();
@@ -130,7 +164,10 @@ function createBlockGrid() {
         const block = document.createElement('div');
         block.className = 'block';
         block.dataset.index = i;
-        block.dataset.isDiamond = i === DIAMOND_BLOCK_INDEX;
+        block.dataset.isDiamond = (i === diamondBlockIndex); // Usar índice aleatório
+        
+        // Remover classe mined se existir
+        block.classList.remove('mined', 'diamond');
         
         block.addEventListener('click', () => mineBlock(block, i));
         block.addEventListener('touchstart', (e) => {
@@ -241,6 +278,11 @@ function showInvitation() {
         reveal.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 500);
 }
+
+// Função global para reiniciar (chamada pelo botão)
+window.restartGame = function() {
+    startNewGame();
+};
 
 // Create particle effects - MELHORADO
 function createParticles(block, count = 8) {
