@@ -21,9 +21,9 @@ document.getElementById('startGame').addEventListener('click', () => {
     window.location.href = 'game.html';
 });
 
-// Start new improved game button
-document.getElementById('startGameNew').addEventListener('click', () => {
-    window.location.href = 'game-new.html';
+// Start sequence game button
+document.getElementById('startGameSequence').addEventListener('click', () => {
+    window.location.href = 'game-sequence.html';
 });
 
 // Add some interactive effects
