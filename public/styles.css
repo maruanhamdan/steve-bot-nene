@@ -91,9 +91,9 @@ body::before {
 .splash-subtitle {
     font-family: 'Press Start 2P', cursive;
     font-size: 32px;
-    color: #FF6B9D;
+    color: #4A90E2;
     text-shadow: 
-        3px 3px 0 #8B1A3D,
+        3px 3px 0 #1E3A5F,
         5px 5px 15px rgba(0,0,0,0.4);
     margin-bottom: 40px;
     animation: bounce 2s infinite;
