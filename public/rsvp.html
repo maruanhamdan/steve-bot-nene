@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="🎮 Confirmar Presença - Aniversário do Heitor!">
+    <meta property="og:description" content="Confirme sua presença na festa de aniversário do Heitor! 17/12/2025 às 19h - Blue Moon, Uberlândia">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="Aniversário Heitor - Minecraft">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🎮 Confirmar Presença - Aniversário Heitor">
+    <meta name="twitter:description" content="Confirme sua presença! 17/12/2025 às 19h">
+    
+    <!-- WhatsApp specific -->
+    <meta name="theme-color" content="#1E3A5F">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>Confirmar Presença - Aniversário Heitor</title>
+    
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/invite/game.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .rsvp-page-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .video-section {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        
+        .video-container-rsvp {
+            background: rgba(0,0,0,0.3);
+            border: 6px solid #FFD700;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .splash-video-rsvp {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+        
+        .rsvp-form-section {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(0,0,0,0.7);
+            border: 4px solid #8B7355;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 0 #6B5A45;
+        }
+        
+        .form-title-rsvp {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 20px;
+            color: #FFD700;
+            text-shadow: 3px 3px 0px #000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .invitation-info-rsvp {
+            background: rgba(255,255,255,0.1);
+            border: 3px solid #8B7355;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+        }
+        
+        .invitation-info-rsvp h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            color: #FFD700;
+            text-shadow: 2px 2px 0px #000;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #fff;
+            text-shadow: 1px 1px 0px #000;
+        }
+        
+        .info-row strong {
+            color: #FFD700;
+        }
+        
+        @media (max-width: 768px) {
+            .form-title-rsvp {
+                font-size: 16px;
+            }
+            
+            .rsvp-form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rsvp-page-container">
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="video-container-rsvp">
+                <video id="rsvpVideo" class="splash-video-rsvp" controls autoplay>
+                    <source src="/steve-video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- RSVP Form Section -->
+        <div class="rsvp-form-section">
+            <h2 class="form-title-rsvp">Confirmar Presença</h2>
+            
+            <!-- Party Info -->
+            <div class="invitation-info-rsvp">
+                <h2>HEITOR - 6 ANOS</h2>
+                <div class="info-row">
+                    <span>Tema:</span>
+                    <strong>MINECRAFT</strong>
+                </div>
+                <div class="info-row">
+                    <span>Data:</span>
+                    <strong>17/12/2025</strong>
+                </div>
+                <div class="info-row">
+                    <span>Horário:</span>
+                    <strong>19:00 às 22:00</strong>
+                </div>
+                <div class="info-row">
+                    <span>Local:</span>
+                    <strong>Blue Moon</strong>
+                </div>
+            </div>
+
+            <!-- RSVP Form -->
+            <div id="rsvpForm" class="rsvp-form">
+                <form id="rsvpFormElement" class="simple-form">
+                    <!-- Convidado -->
+                    <div class="simple-input-group">
+                        <label class="input-label">Convidado:</label>
+                        <input type="text" id="childName" name="childName" required 
+                               placeholder="Nome da criança" 
+                               class="simple-input">
+                    </div>
+                    
+                    <!-- Responsável -->
+                    <div class="simple-input-group">
+                        <label class="input-label">Responsável:</label>
+                        <input type="text" id="parentName" name="parentName" required 
+                               placeholder="Seu nome" 
+                               class="simple-input">
+                    </div>
+                    
+                    <!-- Contato -->
+                    <div class="simple-input-group">
+                        <label class="input-label">Contato:</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" required 
+                               placeholder="WhatsApp (34) 99999-9999" 
+                               class="simple-input">
+                    </div>
+                    
+                    <!-- Confirmação - BOTÕES GRANDES -->
+                    <div class="confirmation-buttons">
+                        <p class="confirmation-label">Vamos à festa?</p>
+                        <div class="button-row">
+                            <button type="button" class="confirmation-btn yes-btn" data-value="yes">
+                                <span class="btn-text">SIM</span>
+                            </button>
+                            <button type="button" class="confirmation-btn no-btn" data-value="no">
+                                <span class="btn-text">NÃO</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="confirmation" name="confirmation" required>
+                    </div>
+                    
+                    <!-- Botão Enviar -->
+                    <button type="submit" class="submit-btn-large" id="submitBtn">
+                        <span class="btn-text-large">ENVIAR</span>
+                    </button>
+                </form>
+                
+                <!-- Sucesso -->
+                <div id="formSuccess" class="form-success-large" style="display: none;">
+                    <div class="success-icon">🎉✨</div>
+                    <h3>Confirmado!</h3>
+                    <p>Nos vemos na festa! 🎮</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // RSVP Form Handling
+        let selectedConfirmation = '';
+
+        // Botões de confirmação
+        document.querySelectorAll('.confirmation-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove seleção anterior
+                document.querySelectorAll('.confirmation-btn').forEach(b => {
+                    b.classList.remove('selected');
+                });
+                
+                // Seleciona atual
+                btn.classList.add('selected');
+                selectedConfirmation = btn.dataset.value;
+                document.getElementById('confirmation').value = selectedConfirmation;
+                
+                // Haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(30);
+                }
+            });
+        });
+
+        // Format WhatsApp input
+        document.getElementById('whatsapp').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    value = `(${value}`;
+                } else if (value.length <= 7) {
+                    value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+                } else {
+                    value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+                }
+            }
+            e.target.value = value;
+        });
+
+        // Load saved name
+        const savedName = localStorage.getItem('playerName');
+        if (savedName) {
+            document.getElementById('childName').value = savedName;
+        }
+
+        // Submit form
+        document.getElementById('rsvpFormElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const childNameInput = document.getElementById('childName');
+            const childName = childNameInput.value.trim();
+            
+            // Salvar nome para próximas vezes
+            if (childName) {
+                localStorage.setItem('playerName', childName);
+            }
+            
+            const formData = {
+                inviteId: null,
+                childName: childName,
+                parentName: document.getElementById('parentName').value.trim(),
+                whatsapp: document.getElementById('whatsapp').value.trim(),
+                confirmation: document.getElementById('confirmation').value,
+                notes: null,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Validate
+            if (!formData.childName || !formData.parentName || !formData.whatsapp || !formData.confirmation) {
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.add('shake');
+                submitBtn.innerHTML = '<span class="btn-text-large">⚠️ PREENCHA TUDO!</span>';
+                setTimeout(() => {
+                    submitBtn.classList.remove('shake');
+                    submitBtn.innerHTML = '<span class="btn-text-large">ENVIAR</span>';
+                }, 2000);
+                return;
+            }
+            
+            // Disable form
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="btn-text-large">⏳ ENVIANDO...</span>';
+            
+            try {
+                const response = await fetch('/api/invite/rsvp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('rsvpFormElement').style.display = 'none';
+                    document.getElementById('formSuccess').style.display = 'block';
+                    
+                    // Haptic feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate([100, 50, 100]);
+                    }
+                    
+                    // Scroll to success message
+                    document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    throw new Error(data.error || 'Erro ao enviar confirmação');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="btn-text-large">❌ TENTAR NOVAMENTE</span>';
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<span class="btn-text-large">ENVIAR</span>';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

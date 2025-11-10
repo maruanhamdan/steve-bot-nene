@@ -146,6 +146,16 @@ app.get('/invite-heitor', (req, res) => {
   res.redirect('/invite/index.html');
 });
 
+// Rota /confirmar - Confirmação rápida (sem jogos)
+app.get('/confirmar', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'rsvp.html'));
+});
+
+// Rota /rsvp - Alias para /confirmar
+app.get('/rsvp', (req, res) => {
+  res.redirect('/confirmar');
+});
+
 // Rota /admin-laila - Admin simples para Laila
 app.get('/admin-laila', (req, res) => {
   res.redirect('/admin/dashboard.html');
