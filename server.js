@@ -516,7 +516,7 @@ app.get('/api/leaderboard/:gameType', async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     
     const leaderboard = await readLeaderboard();
-    const gameKey = gameType === 'minerador' ? 'game1' : 'game2';
+    const gameKey = (gameType === 'minerador') ? 'game1' : 'game2';
     
     const scores = (leaderboard[gameKey] || []).slice(0, limit);
     
