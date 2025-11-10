@@ -148,7 +148,7 @@ app.get('/invite-heitor', (req, res) => {
 
 // Rota /admin-laila - Admin simples para Laila
 app.get('/admin-laila', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
+  res.redirect('/admin/dashboard.html');
 });
 
 // Route redirects for easier access
