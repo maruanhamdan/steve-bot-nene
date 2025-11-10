@@ -84,8 +84,29 @@ body::before {
     text-shadow: 
         6px 6px 0 #8B6914,
         8px 8px 20px rgba(0,0,0,0.5);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     animation: pulse 2s infinite;
+}
+
+.splash-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 32px;
+    color: #FF6B9D;
+    text-shadow: 
+        3px 3px 0 #8B1A3D,
+        5px 5px 15px rgba(0,0,0,0.4);
+    margin-bottom: 40px;
+    animation: bounce 2s infinite;
+    letter-spacing: 3px;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 .video-container {
@@ -662,6 +683,10 @@ input:focus {
         font-size: 56px;
     }
     
+    .splash-subtitle {
+        font-size: 26px;
+    }
+    
     .enter-btn {
         font-size: 20px;
         padding: 22px 45px;
@@ -797,6 +822,10 @@ input:focus {
     
     .splash-title {
         font-size: 42px;
+    }
+    
+    .splash-subtitle {
+        font-size: 20px;
     }
     
     .enter-btn {

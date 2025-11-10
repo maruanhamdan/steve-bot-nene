@@ -5,13 +5,17 @@ Sistema completo com assistente virtual de Minecraft e convite interativo de ani
 ## 🚀 Acesso Rápido
 
 ### Produção (Railway)
-- **Convite**: https://elegant-wonder-production.up.railway.app/invite
-- **Jogo Novo (Melhorado)**: https://elegant-wonder-production.up.railway.app/invite/new
-- **Admin**: https://elegant-wonder-production.up.railway.app/admin
-- **Info**: https://elegant-wonder-production.up.railway.app/info.html
+**URL Base**: https://elegant-wonder-production.up.railway.app
+
+- **Página Principal**: `/heitor` - Vídeo + botão para jogos
+- **Confirmação Rápida**: `/confirmar` ou `/rsvp` - Formulário direto (sem jogos) ⭐
+- **Escolha de Jogos**: `/invite` - Escolher jogo
+- **Jogo Minerador Pro**: `/invite/game.html`
+- **Jogo Sequência Master**: `/invite/game-sequence.html`
+- **Admin (Laila)**: `/admin-laila` - Gerenciar RSVPs
 
 ### Credenciais
-- **Admin Password**: `heitor123` (não está mais no placeholder por segurança)
+- **Admin Password**: `heitor123`
 
 ## 📋 Funcionalidades
 
@@ -52,15 +56,34 @@ Sistema completo com assistente virtual de Minecraft e convite interativo de ani
 ## 🛠️ Desenvolvimento Local
 
 ```bash
+# Instalar dependências
 npm install
+
+# Iniciar servidor
 npm start
+
+# Modo watch (auto-reload)
+npm run dev
 ```
 
-Acesse: http://localhost:3000
+Acesse: http://localhost:3005
+
+**📖 Veja `DESENVOLVIMENTO-LOCAL.md` para guia completo**
 
 ## 📦 Deploy
 
-O projeto está configurado para Railway, Vercel e Render.
+O projeto está configurado para **Railway.app** com deploy automático via GitHub.
+
+**📖 Veja `DEPLOY.md` para guia completo**
+
+## 📚 Documentação
+
+- **`DOCUMENTACAO-PRODUCAO.md`** - Detalhes da produção
+- **`DESENVOLVIMENTO-LOCAL.md`** - Setup e desenvolvimento local
+- **`DEPLOY.md`** - Guia de deploy
+- **`RESUMO-IMPLEMENTACAO.md`** - Resumo completo do que foi feito
+- **`TODAS-PAGINAS.md`** - Lista de todas as páginas
+- **`LAILA-URLS-COMPLETO.md`** - URLs para Laila
 
 ---
 
