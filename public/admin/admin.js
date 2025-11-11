@@ -39,6 +39,7 @@ document.getElementById('passwordInput').addEventListener('keypress', (e) => {
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {
     currentPassword = '';
+    window.currentPassword = ''; // Limpar globalmente
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('passwordInput').value = '';
