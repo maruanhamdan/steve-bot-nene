@@ -88,32 +88,43 @@
     <script src="/admin/admin.js"></script>
     <!-- Fallback: Função deleteRSVP caso admin.js não esteja atualizado -->
     <script>
-    if (typeof deleteRSVP === 'undefined') {
-        async function deleteRSVP(id, childName) {
-            const confirmed = confirm(`Tem certeza que deseja deletar o RSVP de "${childName}"?\n\nEsta ação não pode ser desfeita!`);
-            if (!confirmed) return;
+    // Garantir que função deleteRSVP existe
+    window.deleteRSVP = window.deleteRSVP || async function(id, childName) {
+        const confirmed = confirm(`Tem certeza que deseja deletar o RSVP de "${childName}"?\n\nEsta ação não pode ser desfeita!`);
+        if (!confirmed) return;
+        
+        try {
+            const password = window.currentPassword || '';
+            const response = await fetch(`/api/invite/rsvp/${id}?password=${encodeURIComponent(password)}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            });
             
-            try {
-                const response = await fetch(`/api/invite/rsvp/${id}?password=${encodeURIComponent(currentPassword)}`, {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                const data = await response.json();
-                
-                if (response.ok && data.success) {
-                    allRSVPs = allRSVPs.filter(r => r.id !== id);
-                    applySearch();
-                    loadStats();
-                    alert(`RSVP de "${childName}" deletado com sucesso!`);
-                } else {
-                    alert(`Erro ao deletar RSVP: ${data.error || 'Erro desconhecido'}`);
+            const data = await response.json();
+            
+            if (response.ok && data.success) {
+                if (window.allRSVPs) {
+                    window.allRSVPs = window.allRSVPs.filter(r => r.id !== id);
                 }
-            } catch (error) {
-                console.error('Error deleting RSVP:', error);
-                alert('Erro ao deletar RSVP. Tente novamente.');
+                if (typeof applySearch === 'function') {
+                    applySearch();
+                }
+                if (typeof loadStats === 'function') {
+                    loadStats();
+                }
+                alert(`RSVP de "${childName}" deletado com sucesso!`);
+                // Recarregar lista
+                if (typeof loadRSVPs === 'function') {
+                    loadRSVPs();
+                }
+            } else {
+                alert(`Erro ao deletar RSVP: ${data.error || 'Erro desconhecido'}`);
             }
+        } catch (error) {
+            console.error('Error deleting RSVP:', error);
+            alert('Erro ao deletar RSVP. Tente novamente.');
         }
-    }
+    };
     </script>
 </body>
 </html>
