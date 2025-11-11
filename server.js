@@ -156,11 +156,6 @@ app.get('/rsvp', (req, res) => {
   res.redirect('/confirmar');
 });
 
-// Rota /admin-laila - Admin simples para Laila
-app.get('/admin-laila', (req, res) => {
-  res.redirect('/admin/dashboard.html');
-});
-
 // Route redirects for easier access
 app.get('/invite', (req, res) => {
   res.redirect('/invite/index.html');
@@ -170,8 +165,9 @@ app.get('/invite/sequence', (req, res) => {
   res.redirect('/invite/game-sequence.html');
 });
 
+// Rota /admin - Admin para Laila
 app.get('/admin', (req, res) => {
-  res.redirect('/admin/dashboard.html');
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
 });
 
 app.get('/dashboard', (req, res) => {
