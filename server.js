@@ -165,9 +165,20 @@ app.get('/invite/sequence', (req, res) => {
   res.redirect('/invite/game-sequence.html');
 });
 
-// Rota /admin - Admin para Laila
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
+// Rota /admin - Admin para Laila (servir diretamente do sistema de arquivos)
+app.get('/admin', async (req, res) => {
+  try {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    const filePath = path.join(__dirname, 'public', 'admin', 'dashboard.html');
+    const fileContent = await fs.promises.readFile(filePath, 'utf8');
+    res.setHeader('Content-Type', 'text/html');
+    res.send(fileContent);
+  } catch (error) {
+    console.error('Error serving admin dashboard:', error);
+    res.status(500).send('Error loading admin dashboard');
+  }
 });
 
 // Rota específica para servir admin.js (forçar atualização - ler do sistema de arquivos)
