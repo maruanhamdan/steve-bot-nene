@@ -200,11 +200,14 @@ body {
 }
 
 .simple-description {
-    font-size: 14px;
+    font-size: 16px;
     color: #FFD700;
-    text-shadow: 2px 2px 0px #000;
-    margin: 20px 0 40px 0;
-    line-height: 1.6;
+    text-shadow: 3px 3px 0px #000, 0 0 15px rgba(255,215,0,0.5);
+    margin: 25px 0 35px 0;
+    line-height: 1.8;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 0 20px;
 }
 
 .invite-box {
@@ -289,26 +292,27 @@ body {
 
 .minecraft-btn-primary {
     font-family: 'Press Start 2P', cursive;
-    font-size: 18px;
-    padding: 30px 40px;
+    font-size: 16px;
+    padding: 25px 35px;
     background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
     color: #fff;
-    border: 6px solid #2E7D32;
+    border: 5px solid #2E7D32;
     border-top-color: #81C784;
     border-left-color: #2E7D32;
     cursor: pointer;
     text-shadow: 3px 3px 0px #000;
     box-shadow: 
-        0 12px 0 #1B5E20,
-        inset 0 3px 0 rgba(255,255,255,0.4),
-        0 0 50px rgba(76,175,80,0.6);
+        0 10px 0 #1B5E20,
+        inset 0 2px 0 rgba(255,255,255,0.4),
+        0 0 40px rgba(76,175,80,0.5);
     transition: all 0.2s;
     width: 100%;
-    max-width: 450px;
+    max-width: 380px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     position: relative;
     animation: button-pulse 2s infinite;
 }
@@ -317,49 +321,49 @@ body {
     0%, 100% {
         transform: scale(1);
         box-shadow: 
-            0 12px 0 #1B5E20,
-            inset 0 3px 0 rgba(255,255,255,0.4),
-            0 0 50px rgba(76,175,80,0.6);
+            0 10px 0 #1B5E20,
+            inset 0 2px 0 rgba(255,255,255,0.4),
+            0 0 40px rgba(76,175,80,0.5);
     }
     50% {
-        transform: scale(1.02);
+        transform: scale(1.01);
         box-shadow: 
-            0 12px 0 #1B5E20,
-            inset 0 3px 0 rgba(255,255,255,0.4),
-            0 0 70px rgba(76,175,80,0.8);
+            0 10px 0 #1B5E20,
+            inset 0 2px 0 rgba(255,255,255,0.4),
+            0 0 60px rgba(76,175,80,0.7);
     }
 }
 
 .minecraft-btn-primary .btn-icon {
-    font-size: 40px;
+    font-size: 32px;
     line-height: 1;
     filter: drop-shadow(2px 2px 0px #000);
 }
 
 .minecraft-btn-primary .btn-text {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.2;
 }
 
 .minecraft-btn-primary .btn-subtitle {
-    font-size: 10px;
+    font-size: 9px;
     color: #C8E6C9;
     text-shadow: 1px 1px 0px #000;
-    margin-top: 4px;
+    margin-top: 2px;
     opacity: 0.9;
 }
 
 .minecraft-btn-primary:active {
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(6px) scale(0.98);
     box-shadow: 
         0 4px 0 #1B5E20,
-        inset 0 3px 0 rgba(255,255,255,0.3),
+        inset 0 2px 0 rgba(255,255,255,0.3),
         0 0 30px rgba(76,175,80,0.4);
 }
 
 .minecraft-btn-primary:hover {
     background: linear-gradient(135deg, #66BB6A 0%, #81C784 100%);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 /* Bonus Section */
@@ -505,6 +509,11 @@ body {
         padding: 18px 25px;
     }
     
+    .simple-description {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+    
     .invite-text-main {
         font-size: 16px;
     }
@@ -572,6 +581,11 @@ body {
     .minecraft-btn {
         font-size: 11px;
         padding: 15px 20px;
+    }
+    
+    .simple-description {
+        font-size: 12px;
+        padding: 0 10px;
     }
     
     .invite-text-main {
