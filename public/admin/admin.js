@@ -293,3 +293,4 @@ setInterval(() => {
 
 // Admin deploy verification 1762873181
 // Final deploy 1762873397
+console.log('Admin JS loaded: 1762873657');
