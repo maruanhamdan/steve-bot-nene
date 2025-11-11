@@ -170,12 +170,21 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
 });
 
-// Rota específica para servir admin.js (forçar atualização)
-app.get('/admin/admin.js', (req, res) => {
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  res.sendFile(path.join(__dirname, 'public', 'admin', 'admin.js'));
+// Rota específica para servir admin.js (forçar atualização - ler do sistema de arquivos)
+app.get('/admin/admin.js', async (req, res) => {
+  try {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Content-Type', 'application/javascript');
+    
+    const filePath = path.join(__dirname, 'public', 'admin', 'admin.js');
+    const fileContent = await fs.promises.readFile(filePath, 'utf8');
+    res.send(fileContent);
+  } catch (error) {
+    console.error('Error serving admin.js:', error);
+    res.status(500).send('Error loading admin.js');
+  }
 });
 
 app.get('/dashboard', (req, res) => {
