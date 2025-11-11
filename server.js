@@ -908,3 +908,4 @@ if (!process.env.VERCEL) {
     console.log(`🎤 VOZ: ElevenLabs - Steve-nene (CUSTOMIZADA!) ⭐\n`);
   });
 }
+// Force redeploy
