@@ -207,6 +207,43 @@ body {
     box-shadow: 0 8px 0 #6B5A45, inset 0 2px 0 rgba(255,255,255,0.1);
 }
 
+.invite-box.highlight-box {
+    background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,193,7,0.15) 100%);
+    border: 5px solid #FFD700;
+    border-top-color: #FFEB3B;
+    border-left-color: #FFC107;
+    padding: 30px 25px;
+    margin: 30px 0 40px 0;
+    box-shadow: 
+        0 10px 0 #B8860B,
+        inset 0 2px 0 rgba(255,255,255,0.2),
+        0 0 40px rgba(255,215,0,0.4);
+    animation: pulse-glow 2s infinite;
+    position: relative;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 
+            0 10px 0 #B8860B,
+            inset 0 2px 0 rgba(255,255,255,0.2),
+            0 0 40px rgba(255,215,0,0.4);
+    }
+    50% {
+        box-shadow: 
+            0 10px 0 #B8860B,
+            inset 0 2px 0 rgba(255,255,255,0.2),
+            0 0 60px rgba(255,215,0,0.6);
+    }
+}
+
+.invite-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+    animation: bounce 1.5s infinite;
+    filter: drop-shadow(3px 3px 0px #000);
+}
+
 .invite-text {
     font-size: 14px;
     line-height: 1.8;
@@ -215,11 +252,162 @@ body {
     text-shadow: 2px 2px 0px #000;
 }
 
+.invite-text-main {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #FFD700;
+    text-shadow: 3px 3px 0px #000, 0 0 10px rgba(255,215,0,0.5);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.invite-text-sub {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: #FFEB3B;
+    text-shadow: 2px 2px 0px #000;
+}
+
 .invite-text:last-child {
     margin-bottom: 0;
 }
 
-/* Minecraft Button */
+/* Main Action Section */
+.main-action {
+    margin: 40px 0;
+}
+
+.minecraft-btn-primary {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    padding: 30px 40px;
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    color: #fff;
+    border: 6px solid #2E7D32;
+    border-top-color: #81C784;
+    border-left-color: #2E7D32;
+    cursor: pointer;
+    text-shadow: 3px 3px 0px #000;
+    box-shadow: 
+        0 12px 0 #1B5E20,
+        inset 0 3px 0 rgba(255,255,255,0.4),
+        0 0 50px rgba(76,175,80,0.6);
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    animation: button-pulse 2s infinite;
+}
+
+@keyframes button-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 
+            0 12px 0 #1B5E20,
+            inset 0 3px 0 rgba(255,255,255,0.4),
+            0 0 50px rgba(76,175,80,0.6);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 
+            0 12px 0 #1B5E20,
+            inset 0 3px 0 rgba(255,255,255,0.4),
+            0 0 70px rgba(76,175,80,0.8);
+    }
+}
+
+.minecraft-btn-primary .btn-icon {
+    font-size: 40px;
+    line-height: 1;
+    filter: drop-shadow(2px 2px 0px #000);
+}
+
+.minecraft-btn-primary .btn-text {
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.minecraft-btn-primary .btn-subtitle {
+    font-size: 10px;
+    color: #C8E6C9;
+    text-shadow: 1px 1px 0px #000;
+    margin-top: 4px;
+    opacity: 0.9;
+}
+
+.minecraft-btn-primary:active {
+    transform: translateY(8px) scale(0.98);
+    box-shadow: 
+        0 4px 0 #1B5E20,
+        inset 0 3px 0 rgba(255,255,255,0.3),
+        0 0 30px rgba(76,175,80,0.4);
+}
+
+.minecraft-btn-primary:hover {
+    background: linear-gradient(135deg, #66BB6A 0%, #81C784 100%);
+    transform: translateY(-2px);
+}
+
+/* Bonus Section */
+.bonus-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 3px dashed rgba(255,255,255,0.3);
+    position: relative;
+}
+
+.bonus-label {
+    font-size: 12px;
+    color: #B0BEC5;
+    text-shadow: 1px 1px 0px #000;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.minecraft-btn-bonus {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: 3px solid #5a67d8;
+    border-top-color: #818cf8;
+    border-left-color: #5a67d8;
+    cursor: pointer;
+    text-shadow: 2px 2px 0px #000;
+    box-shadow: 
+        0 6px 0 #4c51bf,
+        inset 0 2px 0 rgba(255,255,255,0.2),
+        0 0 20px rgba(102, 126, 234, 0.3);
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 300px;
+    opacity: 0.85;
+}
+
+.minecraft-btn-bonus:active {
+    transform: translateY(4px);
+    box-shadow: 
+        0 2px 0 #4c51bf,
+        inset 0 2px 0 rgba(255,255,255,0.2);
+}
+
+.minecraft-btn-bonus:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 
+        0 8px 0 #4c51bf,
+        inset 0 2px 0 rgba(255,255,255,0.2),
+        0 0 30px rgba(102, 126, 234, 0.5);
+}
+
+/* Legacy button support */
 .minecraft-btn {
     font-family: 'Press Start 2P', cursive;
     font-size: 14px;
@@ -282,13 +470,47 @@ body {
         font-size: 80px;
     }
     
+    .minecraft-btn-primary {
+        font-size: 14px;
+        padding: 25px 30px;
+    }
+    
+    .minecraft-btn-primary .btn-icon {
+        font-size: 32px;
+    }
+    
+    .minecraft-btn-primary .btn-text {
+        font-size: 14px;
+    }
+    
+    .minecraft-btn-primary .btn-subtitle {
+        font-size: 9px;
+    }
+    
+    .minecraft-btn-bonus {
+        font-size: 11px;
+        padding: 12px 20px;
+    }
+    
     .minecraft-btn {
         font-size: 12px;
         padding: 18px 25px;
     }
     
+    .invite-text-main {
+        font-size: 16px;
+    }
+    
+    .invite-text-sub {
+        font-size: 12px;
+    }
+    
     .invite-text {
         font-size: 12px;
+    }
+    
+    .invite-icon {
+        font-size: 50px;
     }
     
     .info-text {
@@ -302,6 +524,10 @@ body {
     .intro-subtitle {
         font-size: 16px;
     }
+    
+    .bonus-label {
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -313,8 +539,42 @@ body {
         font-size: 60px;
     }
     
+    .minecraft-btn-primary {
+        font-size: 12px;
+        padding: 20px 25px;
+    }
+    
+    .minecraft-btn-primary .btn-icon {
+        font-size: 28px;
+    }
+    
+    .minecraft-btn-primary .btn-text {
+        font-size: 12px;
+    }
+    
+    .minecraft-btn-primary .btn-subtitle {
+        font-size: 8px;
+    }
+    
+    .minecraft-btn-bonus {
+        font-size: 10px;
+        padding: 10px 18px;
+    }
+    
     .minecraft-btn {
         font-size: 11px;
         padding: 15px 20px;
+    }
+    
+    .invite-text-main {
+        font-size: 14px;
+    }
+    
+    .invite-text-sub {
+        font-size: 11px;
+    }
+    
+    .invite-icon {
+        font-size: 40px;
     }
 }
