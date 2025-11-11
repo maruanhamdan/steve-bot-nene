@@ -86,74 +86,36 @@
     </div>
 
     <script src="/admin/admin.js"></script>
-    <!-- Função deleteRSVP garantida - sempre disponível -->
     <script>
-    (function() {
-        // Sobrescrever/garantir função deleteRSVP sempre disponível
-        window.deleteRSVP = async function(id, childName) {
-            console.log('deleteRSVP chamado:', id, childName);
-            const confirmed = confirm('Tem certeza que deseja deletar o RSVP de "' + childName + '"?\n\nEsta ação não pode ser desfeita!');
-            if (!confirmed) {
-                console.log('Deleção cancelada pelo usuário');
-                return;
+    window.deleteRSVP = function(id, childName) {
+        var confirmed = confirm('Tem certeza que deseja deletar o RSVP de "' + childName + '"?\n\nEsta acao nao pode ser desfeita!');
+        if (!confirmed) return;
+        
+        var password = window.currentPassword || '';
+        if (!password) {
+            alert('Erro: Senha nao encontrada. Faca login novamente.');
+            return;
+        }
+        
+        var url = '/api/invite/rsvp/' + id + '?password=' + encodeURIComponent(password);
+        fetch(url, { method: 'DELETE', headers: { 'Content-Type': 'application/json' } })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+            if (data.success) {
+                if (window.allRSVPs) window.allRSVPs = window.allRSVPs.filter(function(r) { return r.id !== id; });
+                if (typeof allRSVPs !== 'undefined') allRSVPs = allRSVPs.filter(function(r) { return r.id !== id; });
+                if (typeof applySearch === 'function') applySearch();
+                if (typeof loadRSVPs === 'function') setTimeout(function() { loadRSVPs(); }, 500);
+                alert('RSVP deletado com sucesso!');
+            } else {
+                alert('Erro: ' + (data.error || 'Erro desconhecido'));
             }
-            
-            try {
-                // Tentar pegar senha de várias fontes
-                const password = window.currentPassword || (typeof currentPassword !== 'undefined' ? currentPassword : '');
-                console.log('Usando senha:', password ? '***' : 'VAZIA');
-                
-                if (!password) {
-                    alert('Erro: Senha não encontrada. Faça login novamente.');
-                    return;
-                }
-                
-                const url = '/api/invite/rsvp/' + id + '?password=' + encodeURIComponent(password);
-                console.log('Deletando:', url);
-                
-                const response = await fetch(url, {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                
-                console.log('Response status:', response.status);
-                const data = await response.json();
-                console.log('Response data:', data);
-                
-                if (response.ok && data.success) {
-                    // Atualizar arrays locais
-                    if (window.allRSVPs) {
-                        window.allRSVPs = window.allRSVPs.filter(function(r) { return r.id !== id; });
-                    }
-                    if (typeof allRSVPs !== 'undefined') {
-                        allRSVPs = allRSVPs.filter(function(r) { return r.id !== id; });
-                    }
-                    
-                    // Atualizar UI
-                    if (typeof applySearch === 'function') {
-                        applySearch();
-                    } else if (typeof renderTable === 'function') {
-                        renderTable();
-                    }
-                    if (typeof loadStats === 'function') {
-                        loadStats();
-                    }
-                    
-                    alert('RSVP de "' + childName + '" deletado com sucesso!');
-                    
-                    // Recarregar lista completa
-                    if (typeof loadRSVPs === 'function') {
-                        setTimeout(function() { loadRSVPs(); }, 500);
-                    }
-                } else {
-                    alert('Erro ao deletar RSVP: ' + (data.error || 'Erro desconhecido'));
-                }
-            } catch (error) {
-                console.error('Error deleting RSVP:', error);
-                alert('Erro ao deletar RSVP: ' + error.message);
-            }
-        };
-    })();
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert('Erro ao deletar RSVP');
+        });
+    };
     </script>
 </body>
 </html>
