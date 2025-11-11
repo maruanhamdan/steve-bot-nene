@@ -547,6 +547,40 @@ app.put('/api/invite/rsvp/:id', async (req, res) => {
   }
 });
 
+// Delete RSVP
+app.delete('/api/invite/rsvp/:id', async (req, res) => {
+  try {
+    const password = req.query.password || req.headers.authorization?.replace('Bearer ', '');
+    
+    if (password !== ADMIN_PASSWORD) {
+      return res.status(401).json({ error: 'Não autorizado' });
+    }
+
+    const { id } = req.params;
+
+    const rsvps = await readRSVPs();
+    const index = rsvps.findIndex(r => r.id === id);
+
+    if (index === -1) {
+      return res.status(404).json({ error: 'RSVP não encontrado' });
+    }
+
+    // Remove o RSVP do array
+    rsvps.splice(index, 1);
+    
+    const success = await writeRSVPs(rsvps);
+    
+    if (!success) {
+      return res.status(500).json({ error: 'Erro ao deletar RSVP' });
+    }
+
+    res.json({ success: true, message: 'RSVP deletado com sucesso' });
+  } catch (error) {
+    console.error('Error deleting RSVP:', error);
+    res.status(500).json({ error: 'Erro ao deletar RSVP' });
+  }
+});
+
 // ==================== LEADERBOARD API ====================
 const LEADERBOARD_FILE = path.join(DATA_DIR, 'leaderboard.json');
 

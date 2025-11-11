@@ -354,6 +354,16 @@ body {
     background: #42A5F5;
 }
 
+.delete-btn {
+    background: #f44336;
+    border-color: #c62828;
+}
+
+.delete-btn:hover {
+    background: #ef5350;
+    border-color: #d32f2f;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }

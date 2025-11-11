@@ -121,7 +121,8 @@ function renderTable() {
                 <td><span class="confirmation-badge ${confirmationClass}">${confirmationText}</span></td>
                 <td>${rsvp.notes ? escapeHtml(rsvp.notes) : '-'}</td>
                 <td>
-                    <button class="action-btn" onclick="copyRSVP('${rsvp.id}')">📋</button>
+                    <button class="action-btn" onclick="copyRSVP('${rsvp.id}')" title="Copiar">📋</button>
+                    <button class="action-btn delete-btn" onclick="deleteRSVP('${rsvp.id}', ${JSON.stringify(rsvp.childName)})" title="Deletar">🗑️</button>
                 </td>
             </tr>
         `;
@@ -235,6 +236,43 @@ function copyRSVP(id) {
     }).catch(() => {
         alert('Erro ao copiar. Informações:\n\n' + text);
     });
+}
+
+// Delete RSVP
+async function deleteRSVP(id, childName) {
+    // Confirmação antes de deletar
+    const confirmed = confirm(`Tem certeza que deseja deletar o RSVP de "${childName}"?\n\nEsta ação não pode ser desfeita!`);
+    
+    if (!confirmed) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/invite/rsvp/${id}?password=${encodeURIComponent(currentPassword)}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+            // Remove do array local
+            allRSVPs = allRSVPs.filter(r => r.id !== id);
+            
+            // Atualiza filtros e renderiza
+            applySearch();
+            loadStats();
+            
+            alert(`RSVP de "${childName}" deletado com sucesso!`);
+        } else {
+            alert(`Erro ao deletar RSVP: ${data.error || 'Erro desconhecido'}`);
+        }
+    } catch (error) {
+        console.error('Error deleting RSVP:', error);
+        alert('Erro ao deletar RSVP. Tente novamente.');
+    }
 }
 
 // Utility: Escape HTML
