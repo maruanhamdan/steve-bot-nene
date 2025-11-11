@@ -170,6 +170,14 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
 });
 
+// Rota específica para servir admin.js (forçar atualização)
+app.get('/admin/admin.js', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'admin.js'));
+});
+
 app.get('/dashboard', (req, res) => {
   res.redirect('/dashboard/login.html');
 });
