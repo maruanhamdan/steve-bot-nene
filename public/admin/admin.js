@@ -5,6 +5,10 @@ let currentPassword = '';
 let allRSVPs = [];
 let filteredRSVPs = [];
 
+// Expor variáveis globalmente para função inline
+window.currentPassword = currentPassword;
+window.allRSVPs = allRSVPs;
+
 // Login - MELHORADO com debug
 document.getElementById('loginBtn').addEventListener('click', () => {
     const password = document.getElementById('passwordInput').value.trim();
@@ -13,6 +17,7 @@ document.getElementById('loginBtn').addEventListener('click', () => {
     
     if (password === ADMIN_PASSWORD) {
         currentPassword = password;
+        window.currentPassword = password; // Expor globalmente
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         loadRSVPs();
