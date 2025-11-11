@@ -52,6 +52,7 @@ async function loadRSVPs() {
         
         if (response.ok) {
             allRSVPs = data.rsvps || [];
+            window.allRSVPs = allRSVPs; // Expor globalmente
             filteredRSVPs = [...allRSVPs];
             updateStats();
             renderTable();
